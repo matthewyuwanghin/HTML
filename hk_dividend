@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="300">
+    <title>港股股息率 TTM</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft JhengHei", sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #fff;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            margin-bottom: 8px;
+            color: #4ade80;
+        }
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        .formula {
+            text-align: center;
+            color: #667eea;
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            font-family: monospace;
+        }
+        .update-time {
+            text-align: center;
+            color: #666;
+            font-size: 0.85em;
+            margin-bottom: 30px;
+        }
+        
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th {
+            background: rgba(74, 222, 128, 0.15);
+            padding: 15px 12px;
+            text-align: left;
+            font-size: 0.9em;
+            color: #4ade80;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(74, 222, 128, 0.3);
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        th:hover {
+            background: rgba(74, 222, 128, 0.25);
+        }
+        th .sort-icon {
+            margin-left: 5px;
+            opacity: 0.5;
+        }
+        th.sorted .sort-icon {
+            opacity: 1;
+        }
+        td {
+            padding: 18px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            vertical-align: middle;
+        }
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .symbol {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+        }
+        .name {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 3px;
+        }
+        .price {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #fff;
+        }
+        .ttm-yield {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #4ade80;
+        }
+        .ttm-yield.low {
+            color: #fbbf24;
+        }
+        .ttm-yield.very-low {
+            color: #888;
+        }
+        .dividend-sum {
+            color: #aaa;
+            font-size: 0.95em;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #555;
+            font-size: 0.8em;
+        }
+        
+        .sort-hint {
+            text-align: center;
+            color: #667eea;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 700px) {
+            th, td {
+                padding: 12px 8px;
+                font-size: 0.85em;
+            }
+            .symbol {
+                font-size: 1.1em;
+            }
+            .ttm-yield {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 港股股息率 TTM</h1>
+        <p class="subtitle">HK Stock Trailing Twelve Months Dividend Yield</p>
+        <p class="formula">TTM Yield = (過去12個月派息總和 ÷ 現價) × 100%</p>
+        <p class="update-time">更新時間: 2026-01-30 18:04:57</p>
+        <p class="sort-hint">💡 點擊表頭排序 Click header to sort</p>
+        
+        <table id="stockTable">
+            <thead>
+                <tr>
+                    <th onclick="sortTable(0, 'string')" data-col="0">
+                        股票 Stock <span class="sort-icon">⇅</span>
+                    </th>
+                    <th onclick="sortTable(1, 'number')" data-col="1">
+                        現價 Price <span class="sort-icon">⇅</span>
+                    </th>
+                    <th onclick="sortTable(2, 'number')" data-col="2">
+                        12個月派息 Dividend <span class="sort-icon">⇅</span>
+                    </th>
+                    <th onclick="sortTable(3, 'number')" data-col="3">
+                        股息率 TTM Yield <span class="sort-icon">⇅</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td data-value="0388">
+                        <div class="symbol">0388</div>
+                        <div class="name">香港交易所 HK Exchanges & Clearing</div>
+                    </td>
+                    <td data-value="432.20"><span class="price">HKD 432.20</span></td>
+                    <td data-value="10.9000"><span class="dividend-sum">HKD 10.9000</span></td>
+                    <td data-value="2.5220"><span class="ttm-yield ">2.52%</span></td>
+                </tr>
+    
+                <tr>
+                    <td data-value="9988">
+                        <div class="symbol">9988</div>
+                        <div class="name">阿里巴巴 Alibaba Group</div>
+                    </td>
+                    <td data-value="169.20"><span class="price">HKD 169.20</span></td>
+                    <td data-value="1.9521"><span class="dividend-sum">HKD 1.9521</span></td>
+                    <td data-value="1.1537"><span class="ttm-yield low">1.15%</span></td>
+                </tr>
+    
+                <tr>
+                    <td data-value="0700">
+                        <div class="symbol">0700</div>
+                        <div class="name">騰訊控股 Tencent Holdings</div>
+                    </td>
+                    <td data-value="606.00"><span class="price">HKD 606.00</span></td>
+                    <td data-value="4.5000"><span class="dividend-sum">HKD 4.5000</span></td>
+                    <td data-value="0.7426"><span class="ttm-yield very-low">0.74%</span></td>
+                </tr>
+    
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            <p>📊 數據來源：Yahoo Finance | ⚠️ 資料僅供參考</p>
+        </div>
+    </div>
+    
+    <script>
+        let currentSortCol = -1;  // ✅ FIXED: Changed from 3 to -1
+        let currentSortDir = 'desc';
+        
+        function sortTable(colIndex, type) {
+            const table = document.getElementById('stockTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const headers = table.querySelectorAll('th');
+            
+            // Toggle direction if same column, otherwise default to desc for numbers
+            if (currentSortCol === colIndex) {
+                currentSortDir = currentSortDir === 'asc' ? 'desc' : 'asc';
+            } else {
+                currentSortDir = (type === 'number') ? 'desc' : 'asc';
+            }
+            currentSortCol = colIndex;
+            
+            // Update header icons
+            headers.forEach((th, idx) => {
+                th.classList.remove('sorted');
+                const icon = th.querySelector('.sort-icon');
+                if (idx === colIndex) {
+                    th.classList.add('sorted');
+                    icon.textContent = currentSortDir === 'asc' ? '▲' : '▼';
+                } else {
+                    icon.textContent = '⇅';
+                }
+            });
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                let aVal = a.cells[colIndex].getAttribute('data-value') || a.cells[colIndex].textContent.trim();
+                let bVal = b.cells[colIndex].getAttribute('data-value') || b.cells[colIndex].textContent.trim();
+                
+                if (type === 'number') {
+                    aVal = parseFloat(aVal) || 0;
+                    bVal = parseFloat(bVal) || 0;
+                    return currentSortDir === 'asc' ? aVal - bVal : bVal - aVal;
+                } else {
+                    return currentSortDir === 'asc' 
+                        ? aVal.localeCompare(bVal, 'zh-HK') 
+                        : bVal.localeCompare(aVal, 'zh-HK');
+                }
+            });
+            
+            // Re-append sorted rows
+            rows.forEach(row => tbody.appendChild(row));
+        }
+        
+        // Sort by TTM Yield (column 3) descending on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            sortTable(3, 'number');
+        });
+    </script>
+</body>
+</html>
+    
