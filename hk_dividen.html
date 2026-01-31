@@ -53,6 +53,9 @@
             color: #4ade80;
             font-weight: bold;
         }
+        .formula-label.forward {
+            color: #fbbf24;
+        }
         .stats {
             text-align: center;
             color: #4ade80;
@@ -102,6 +105,7 @@
         }
         .col-group-forward {
             background: rgba(251, 191, 36, 0.2) !important;
+            color: #fbbf24 !important;
         }
         
         td {
@@ -138,6 +142,9 @@
             font-weight: 700;
             color: #4ade80;
         }
+        .ttm-yield.medium {
+            color: #a3e635;
+        }
         .ttm-yield.low {
             color: #fbbf24;
         }
@@ -154,13 +161,23 @@
         .forward-yield.high {
             color: #4ade80;
         }
+        .forward-yield.medium {
+            color: #a3e635;
+        }
         .forward-yield.low {
             color: #888;
+        }
+        .forward-yield.na {
+            color: #555;
+            font-size: 1em;
         }
         
         .dividend-sum {
             color: #aaa;
             font-size: 0.9em;
+        }
+        .dividend-sum.na {
+            color: #555;
         }
         
         .footer {
@@ -225,23 +242,23 @@
         <p class="subtitle">HK Stock Dividend Yield (Trailing & Forward)</p>
         
         <div class="formula-box">
-            <p class="formula"><span class="formula-label">TTM Yield:</span> 過去12個月派息總和 ÷ 現價 × 100%</p>
-            <p class="formula"><span class="formula-label">Forward Yield:</span> 預期年度派息 ÷ 現價 × 100%</p>
+            <p class="formula"><span class="formula-label">TTM Yield (歷史):</span> 過去12個月派息總和 ÷ 現價 × 100%</p>
+            <p class="formula"><span class="formula-label forward">Forward Yield (預期):</span> 預期年度派息 ÷ 現價 × 100%</p>
         </div>
         
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-dot ttm"></div>
-                <span>TTM (歷史)</span>
+                <span>TTM 歷史息率</span>
             </div>
             <div class="legend-item">
                 <div class="legend-dot forward"></div>
-                <span>Forward (預期)</span>
+                <span>Forward 預期息率</span>
             </div>
         </div>
         
         <p class="stats">📈 顯示 15 隻有派息股票 (已過濾 TTM 0%)</p>
-        <p class="update-time">更新時間: 2026-01-31 23:04:34</p>
+        <p class="update-time">更新時間: 2026-01-31 23:07:57</p>
         <p class="sort-hint">💡 點擊表頭排序 | Click header to sort</p>
         
         <table id="stockTable">
@@ -283,11 +300,11 @@
                     <td data-value="116.4251">
                         <span class="ttm-yield ">116.43%</span>
                     </td>
-                    <td data-value="0.0000">
-                        <span class="dividend-sum">HKD 0.0000</span>
+                    <td data-value="0">
+                        <span class="dividend-sum na">N/A</span>
                     </td>
-                    <td data-value="0.0000">
-                        <span class="forward-yield low">0.00%</span>
+                    <td data-value="0">
+                        <span class="forward-yield na">N/A</span>
                     </td>
                 </tr>
     
@@ -306,10 +323,10 @@
                         <span class="ttm-yield ">6.56%</span>
                     </td>
                     <td data-value="0.3800">
-                        <span class="dividend-sum">HKD 0.3800</span>
+                        <span class="dividend-sum ">HKD 0.3800</span>
                     </td>
-                    <td data-value="651.0000">
-                        <span class="forward-yield high">651.00%</span>
+                    <td data-value="6.5180">
+                        <span class="forward-yield high">6.52%</span>
                     </td>
                 </tr>
     
@@ -325,13 +342,13 @@
                         <span class="dividend-sum">HKD 1.8000</span>
                     </td>
                     <td data-value="5.7841">
-                        <span class="ttm-yield ">5.78%</span>
+                        <span class="ttm-yield medium">5.78%</span>
                     </td>
                     <td data-value="1.8000">
-                        <span class="dividend-sum">HKD 1.8000</span>
+                        <span class="dividend-sum ">HKD 1.8000</span>
                     </td>
-                    <td data-value="567.0000">
-                        <span class="forward-yield high">567.00%</span>
+                    <td data-value="5.7841">
+                        <span class="forward-yield medium">5.78%</span>
                     </td>
                 </tr>
     
@@ -347,13 +364,13 @@
                         <span class="dividend-sum">HKD 0.7700</span>
                     </td>
                     <td data-value="5.1609">
-                        <span class="ttm-yield ">5.16%</span>
+                        <span class="ttm-yield medium">5.16%</span>
                     </td>
                     <td data-value="0.7700">
-                        <span class="dividend-sum">HKD 0.7700</span>
+                        <span class="dividend-sum ">HKD 0.7700</span>
                     </td>
-                    <td data-value="523.0000">
-                        <span class="forward-yield high">523.00%</span>
+                    <td data-value="5.1609">
+                        <span class="forward-yield medium">5.16%</span>
                     </td>
                 </tr>
     
@@ -369,13 +386,13 @@
                         <span class="dividend-sum">HKD 0.8600</span>
                     </td>
                     <td data-value="5.1099">
-                        <span class="ttm-yield ">5.11%</span>
+                        <span class="ttm-yield medium">5.11%</span>
                     </td>
                     <td data-value="0.8600">
-                        <span class="dividend-sum">HKD 0.8600</span>
+                        <span class="dividend-sum ">HKD 0.8600</span>
                     </td>
-                    <td data-value="511.0000">
-                        <span class="forward-yield high">511.00%</span>
+                    <td data-value="5.1099">
+                        <span class="forward-yield medium">5.11%</span>
                     </td>
                 </tr>
     
@@ -391,13 +408,13 @@
                         <span class="dividend-sum">HKD 1.0800</span>
                     </td>
                     <td data-value="5.0373">
-                        <span class="ttm-yield ">5.04%</span>
+                        <span class="ttm-yield medium">5.04%</span>
                     </td>
                     <td data-value="1.0800">
-                        <span class="dividend-sum">HKD 1.0800</span>
+                        <span class="dividend-sum ">HKD 1.0800</span>
                     </td>
-                    <td data-value="501.0000">
-                        <span class="forward-yield high">501.00%</span>
+                    <td data-value="5.0373">
+                        <span class="forward-yield medium">5.04%</span>
                     </td>
                 </tr>
     
@@ -413,13 +430,13 @@
                         <span class="dividend-sum">HKD 0.3500</span>
                     </td>
                     <td data-value="4.7490">
-                        <span class="ttm-yield ">4.75%</span>
+                        <span class="ttm-yield medium">4.75%</span>
                     </td>
                     <td data-value="0.3500">
-                        <span class="dividend-sum">HKD 0.3500</span>
+                        <span class="dividend-sum ">HKD 0.3500</span>
                     </td>
-                    <td data-value="474.0000">
-                        <span class="forward-yield high">474.00%</span>
+                    <td data-value="4.7490">
+                        <span class="forward-yield medium">4.75%</span>
                     </td>
                 </tr>
     
@@ -435,13 +452,13 @@
                         <span class="dividend-sum">HKD 2.8200</span>
                     </td>
                     <td data-value="4.6496">
-                        <span class="ttm-yield ">4.65%</span>
+                        <span class="ttm-yield medium">4.65%</span>
                     </td>
                     <td data-value="2.8200">
-                        <span class="dividend-sum">HKD 2.8200</span>
+                        <span class="dividend-sum ">HKD 2.8200</span>
                     </td>
-                    <td data-value="461.0000">
-                        <span class="forward-yield high">461.00%</span>
+                    <td data-value="4.6496">
+                        <span class="forward-yield medium">4.65%</span>
                     </td>
                 </tr>
     
@@ -457,13 +474,13 @@
                         <span class="dividend-sum">HKD 3.4000</span>
                     </td>
                     <td data-value="4.5093">
-                        <span class="ttm-yield ">4.51%</span>
+                        <span class="ttm-yield medium">4.51%</span>
                     </td>
                     <td data-value="3.4000">
-                        <span class="dividend-sum">HKD 3.4000</span>
+                        <span class="dividend-sum ">HKD 3.4000</span>
                     </td>
-                    <td data-value="446.0000">
-                        <span class="forward-yield high">446.00%</span>
+                    <td data-value="4.5093">
+                        <span class="forward-yield medium">4.51%</span>
                     </td>
                 </tr>
     
@@ -479,13 +496,13 @@
                         <span class="dividend-sum">HKD 3.1500</span>
                     </td>
                     <td data-value="4.2596">
-                        <span class="ttm-yield ">4.26%</span>
+                        <span class="ttm-yield medium">4.26%</span>
                     </td>
                     <td data-value="2.5200">
-                        <span class="dividend-sum">HKD 2.5200</span>
+                        <span class="dividend-sum ">HKD 2.5200</span>
                     </td>
-                    <td data-value="336.0000">
-                        <span class="forward-yield high">336.00%</span>
+                    <td data-value="3.4077">
+                        <span class="forward-yield ">3.41%</span>
                     </td>
                 </tr>
     
@@ -504,10 +521,10 @@
                         <span class="ttm-yield low">3.76%</span>
                     </td>
                     <td data-value="5.1300">
-                        <span class="dividend-sum">HKD 5.1300</span>
+                        <span class="dividend-sum ">HKD 5.1300</span>
                     </td>
-                    <td data-value="376.0000">
-                        <span class="forward-yield high">376.00%</span>
+                    <td data-value="3.7555">
+                        <span class="forward-yield ">3.76%</span>
                     </td>
                 </tr>
     
@@ -526,10 +543,10 @@
                         <span class="ttm-yield low">3.52%</span>
                     </td>
                     <td data-value="2.2200">
-                        <span class="dividend-sum">HKD 2.2200</span>
+                        <span class="dividend-sum ">HKD 2.2200</span>
                     </td>
-                    <td data-value="335.0000">
-                        <span class="forward-yield high">335.00%</span>
+                    <td data-value="3.5099">
+                        <span class="forward-yield ">3.51%</span>
                     </td>
                 </tr>
     
@@ -548,10 +565,10 @@
                         <span class="ttm-yield low">3.23%</span>
                     </td>
                     <td data-value="0.0500">
-                        <span class="dividend-sum">HKD 0.0500</span>
+                        <span class="dividend-sum ">HKD 0.0500</span>
                     </td>
-                    <td data-value="1613.0000">
-                        <span class="forward-yield high">1613.00%</span>
+                    <td data-value="16.1290">
+                        <span class="forward-yield high">16.13%</span>
                     </td>
                 </tr>
     
@@ -570,10 +587,10 @@
                         <span class="ttm-yield low">2.98%</span>
                     </td>
                     <td data-value="3.7500">
-                        <span class="dividend-sum">HKD 3.7500</span>
+                        <span class="dividend-sum ">HKD 3.7500</span>
                     </td>
-                    <td data-value="301.0000">
-                        <span class="forward-yield high">301.00%</span>
+                    <td data-value="2.9833">
+                        <span class="forward-yield ">2.98%</span>
                     </td>
                 </tr>
     
@@ -592,10 +609,10 @@
                         <span class="ttm-yield very-low">1.58%</span>
                     </td>
                     <td data-value="0.4000">
-                        <span class="dividend-sum">HKD 0.4000</span>
+                        <span class="dividend-sum ">HKD 0.4000</span>
                     </td>
-                    <td data-value="158.0000">
-                        <span class="forward-yield high">158.00%</span>
+                    <td data-value="1.5848">
+                        <span class="forward-yield low">1.58%</span>
                     </td>
                 </tr>
     
@@ -604,7 +621,8 @@
         
         <div class="footer">
             <p>📊 數據來源：Yahoo Finance | ⚠️ 資料僅供參考，不構成投資建議</p>
-            <p>TTM = Trailing Twelve Months | Forward = 預期/預測</p>
+            <p>TTM = Trailing Twelve Months (過去12個月) | Forward = 預期/預測年度派息</p>
+            <p>N/A = 無預期派息數據</p>
         </div>
     </div>
     
