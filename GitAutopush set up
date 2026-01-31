@@ -1,0 +1,13 @@
+# Clone the repository to your local machine
+cd ~/Desktop
+git clone https://github.com/matthewyuwanghin/HTML.git
+
+# Configure Git (if not already done)
+git config --global user.name "matthewyuwanghin"
+git config --global user.email "forgetbb000@gmail.com"
+
+# Store credentials so you don't need to enter them every time
+git config --global credential.helper store
+
+
+
