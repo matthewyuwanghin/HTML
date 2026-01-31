@@ -61,41 +61,11 @@
             font-size: 0.9em;
             margin-bottom: 8px;
         }
-        .stats-detail {
-            text-align: center;
-            color: #888;
-            font-size: 0.8em;
-            margin-bottom: 8px;
-        }
-        .stats-detail .zero-count {
-            color: #ef4444;
-        }
-        .stats-detail .dividend-count {
-            color: #4ade80;
-        }
         .update-time {
             text-align: center;
             color: #666;
             font-size: 0.85em;
             margin-bottom: 30px;
-        }
-        
-        /* Config Info */
-        .config-info {
-            text-align: center;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 8px;
-            padding: 10px;
-            margin: 10px auto;
-            max-width: 400px;
-            font-size: 0.8em;
-            color: #fca5a5;
-        }
-        .config-info.include {
-            background: rgba(74, 222, 128, 0.1);
-            border-color: rgba(74, 222, 128, 0.3);
-            color: #86efac;
         }
         
         /* Legend */
@@ -119,7 +89,6 @@
         }
         .legend-ttm { background: #4ade80; }
         .legend-fwd { background: #60a5fa; }
-        .legend-zero { background: #555; border: 1px dashed #888; }
         
         table {
             width: 100%;
@@ -171,28 +140,6 @@
             border-bottom: none;
         }
         
-        /* Zero Dividend Row Styling */
-        tr.zero-dividend-row {
-            opacity: 0.6;
-            background: rgba(100, 100, 100, 0.1);
-        }
-        tr.zero-dividend-row:hover td {
-            background: rgba(100, 100, 100, 0.15);
-        }
-        tr.zero-dividend-row .symbol {
-            color: #888;
-        }
-        tr.zero-dividend-row .zero-badge {
-            display: inline-block;
-            background: rgba(239, 68, 68, 0.2);
-            color: #ef4444;
-            font-size: 0.65em;
-            padding: 2px 6px;
-            border-radius: 4px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-        
         .symbol {
             font-size: 1.15em;
             font-weight: 700;
@@ -222,10 +169,6 @@
         .ttm-yield.low {
             color: #888;
         }
-        .ttm-yield.zero {
-            color: #555;
-            font-size: 1em;
-        }
         
         /* Forward Yield Styling */
         .fwd-yield {
@@ -243,17 +186,10 @@
             color: #555;
             font-size: 1em;
         }
-        .fwd-yield.zero {
-            color: #555;
-            font-size: 1em;
-        }
         
         .dividend-sum {
             color: #aaa;
             font-size: 0.85em;
-        }
-        .dividend-sum.zero {
-            color: #555;
         }
         .dividend-count {
             color: #666;
@@ -262,9 +198,6 @@
         .fwd-dividend {
             color: #93c5fd;
             font-size: 0.85em;
-        }
-        .fwd-dividend.zero {
-            color: #555;
         }
         
         .ex-date {
@@ -305,30 +238,6 @@
             color: #667eea;
             font-size: 0.8em;
             margin-bottom: 15px;
-        }
-        
-        /* Filter Toggle */
-        .filter-toggle {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-        .filter-btn {
-            background: rgba(102, 126, 234, 0.2);
-            border: 1px solid rgba(102, 126, 234, 0.5);
-            color: #667eea;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85em;
-            transition: all 0.2s;
-        }
-        .filter-btn:hover {
-            background: rgba(102, 126, 234, 0.3);
-        }
-        .filter-btn.active {
-            background: rgba(74, 222, 128, 0.2);
-            border-color: rgba(74, 222, 128, 0.5);
-            color: #4ade80;
         }
         
         /* Responsive */
@@ -376,10 +285,6 @@
             <p class="formula"><span class="fwd">🔮 Forward Yield</span> = (預計年度派息 ÷ 現價) × 100%</p>
         </div>
         
-        <div class="config-info include">
-            ✅ 包含零股息股票 (INCLUDE_ZERO_DIVIDEND = True)
-        </div>
-        
         <div class="legend">
             <div class="legend-item">
                 <div class="legend-color legend-ttm"></div>
@@ -389,25 +294,10 @@
                 <div class="legend-color legend-fwd"></div>
                 <span>Forward 預計 (估計)</span>
             </div>
-            <div class="legend-item">
-                <div class="legend-color legend-zero"></div>
-                <span>零股息 (0%)</span>
-            </div>
         </div>
         
         <p class="stats">📈 共 11 隻股票</p>
-        <p class="stats-detail">
-            <span class="dividend-count">💚 有股息: 10 隻</span> | 
-            <span class="zero-count">🔴 零股息: 1 隻</span>
-        </p>
-        <p class="update-time">更新時間: 2026-01-31 22:55:24</p>
-        
-        <div class="filter-toggle">
-            <button class="filter-btn active" onclick="toggleZeroDividend(this)">
-                👁️ 顯示/隱藏零股息股票
-            </button>
-        </div>
-        
+        <p class="update-time">更新時間: 2026-01-31 22:57:11</p>
         <p class="sort-hint">💡 點擊表頭排序 | Click header to sort</p>
         
         <table id="stockTable">
@@ -438,7 +328,7 @@
             </thead>
             <tbody>
                 
-                <tr class="">
+                <tr>
                     <td data-value="3416">
                         <div class="symbol">3416</div>
                         <div class="name">Global X 國指備兌認購期權主動型ETF<br>Global X HSCEI Covered Call Active ETF</div>
@@ -447,14 +337,14 @@
                         <span class="price">HKD 10.40</span>
                     </td>
                     <td data-value="1.7400">
-                        <span class="dividend-sum ">HKD 1.7400</span>
+                        <span class="dividend-sum">HKD 1.7400</span>
                         <div class="dividend-count">(12次派息)</div>
                     </td>
                     <td data-value="16.7308">
                         <span class="ttm-yield ">16.73%</span>
                     </td>
                     <td data-value="0.0000">
-                        <span class="fwd-dividend ">N/A</span>
+                        <span class="fwd-dividend">N/A</span>
                     </td>
                     <td data-value="0.0000">
                         <span class="fwd-yield na">N/A</span>
@@ -465,7 +355,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0008">
                         <div class="symbol">0008</div>
                         <div class="name">電訊盈科<br>PCCW</div>
@@ -474,17 +364,17 @@
                         <span class="price">HKD 5.83</span>
                     </td>
                     <td data-value="0.3825">
-                        <span class="dividend-sum ">HKD 0.3825</span>
+                        <span class="dividend-sum">HKD 0.3825</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="6.5609">
                         <span class="ttm-yield ">6.56%</span>
                     </td>
                     <td data-value="0.3800">
-                        <span class="fwd-dividend ">HKD 0.3800</span>
+                        <span class="fwd-dividend">HKD 0.3800</span>
                     </td>
                     <td data-value="6.5180">
-                        <span class="fwd-yield ">6.52</span>
+                        <span class="fwd-yield ">6.52%</span>
                         
                     </td>
                     <td data-value="2025-08-15">
@@ -492,7 +382,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0012">
                         <div class="symbol">0012</div>
                         <div class="name">恒基兆業地產<br>Henderson Land</div>
@@ -501,17 +391,17 @@
                         <span class="price">HKD 31.12</span>
                     </td>
                     <td data-value="1.8000">
-                        <span class="dividend-sum ">HKD 1.8000</span>
+                        <span class="dividend-sum">HKD 1.8000</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="5.7841">
                         <span class="ttm-yield ">5.78%</span>
                     </td>
                     <td data-value="1.8000">
-                        <span class="fwd-dividend ">HKD 1.8000</span>
+                        <span class="fwd-dividend">HKD 1.8000</span>
                     </td>
                     <td data-value="5.7841">
-                        <span class="fwd-yield ">5.78</span>
+                        <span class="fwd-yield ">5.78%</span>
                         
                     </td>
                     <td data-value="2025-09-03">
@@ -519,7 +409,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0010">
                         <div class="symbol">0010</div>
                         <div class="name">恒隆集團<br>Hang Lung Group</div>
@@ -528,17 +418,17 @@
                         <span class="price">HKD 16.83</span>
                     </td>
                     <td data-value="0.8600">
-                        <span class="dividend-sum ">HKD 0.8600</span>
+                        <span class="dividend-sum">HKD 0.8600</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="5.1099">
                         <span class="ttm-yield ">5.11%</span>
                     </td>
                     <td data-value="0.8600">
-                        <span class="fwd-dividend ">HKD 0.8600</span>
+                        <span class="fwd-dividend">HKD 0.8600</span>
                     </td>
                     <td data-value="5.1099">
-                        <span class="fwd-yield ">5.11</span>
+                        <span class="fwd-yield ">5.11%</span>
                         
                     </td>
                     <td data-value="2026-05-06">
@@ -546,7 +436,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0003">
                         <div class="symbol">0003</div>
                         <div class="name">香港中華煤氣<br>HK & China Gas</div>
@@ -555,17 +445,17 @@
                         <span class="price">HKD 7.37</span>
                     </td>
                     <td data-value="0.3500">
-                        <span class="dividend-sum ">HKD 0.3500</span>
+                        <span class="dividend-sum">HKD 0.3500</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="4.7490">
                         <span class="ttm-yield ">4.75%</span>
                     </td>
                     <td data-value="0.3500">
-                        <span class="fwd-dividend ">HKD 0.3500</span>
+                        <span class="fwd-dividend">HKD 0.3500</span>
                     </td>
                     <td data-value="4.7490">
-                        <span class="fwd-yield ">4.75</span>
+                        <span class="fwd-yield ">4.75%</span>
                         
                     </td>
                     <td data-value="2025-09-02">
@@ -573,7 +463,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0006">
                         <div class="symbol">0006</div>
                         <div class="name">電能實業<br>Power Assets</div>
@@ -582,17 +472,17 @@
                         <span class="price">HKD 60.65</span>
                     </td>
                     <td data-value="2.8200">
-                        <span class="dividend-sum ">HKD 2.8200</span>
+                        <span class="dividend-sum">HKD 2.8200</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="4.6496">
                         <span class="ttm-yield ">4.65%</span>
                     </td>
                     <td data-value="2.8200">
-                        <span class="fwd-dividend ">HKD 2.8200</span>
+                        <span class="fwd-dividend">HKD 2.8200</span>
                     </td>
                     <td data-value="4.6496">
-                        <span class="fwd-yield ">4.65</span>
+                        <span class="fwd-yield ">4.65%</span>
                         
                     </td>
                     <td data-value="2025-09-10">
@@ -600,7 +490,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0002">
                         <div class="symbol">0002</div>
                         <div class="name">中電控股<br>CLP Holdings</div>
@@ -609,17 +499,17 @@
                         <span class="price">HKD 73.95</span>
                     </td>
                     <td data-value="3.1500">
-                        <span class="dividend-sum ">HKD 3.1500</span>
+                        <span class="dividend-sum">HKD 3.1500</span>
                         <div class="dividend-count">(4次派息)</div>
                     </td>
                     <td data-value="4.2596">
                         <span class="ttm-yield ">4.26%</span>
                     </td>
                     <td data-value="2.5200">
-                        <span class="fwd-dividend ">HKD 2.5200</span>
+                        <span class="fwd-dividend">HKD 2.5200</span>
                     </td>
                     <td data-value="3.4077">
-                        <span class="fwd-yield medium">3.41</span>
+                        <span class="fwd-yield medium">3.41%</span>
                         <span class="yield-comparison yield-lower">↓</span>
                     </td>
                     <td data-value="2025-12-02">
@@ -627,7 +517,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0005">
                         <div class="symbol">0005</div>
                         <div class="name">滙豐控股<br>HSBC Holdings</div>
@@ -636,17 +526,17 @@
                         <span class="price">HKD 136.60</span>
                     </td>
                     <td data-value="5.1304">
-                        <span class="dividend-sum ">HKD 5.1304</span>
+                        <span class="dividend-sum">HKD 5.1304</span>
                         <div class="dividend-count">(4次派息)</div>
                     </td>
                     <td data-value="3.7558">
                         <span class="ttm-yield medium">3.76%</span>
                     </td>
                     <td data-value="5.1300">
-                        <span class="fwd-dividend ">HKD 5.1300</span>
+                        <span class="fwd-dividend">HKD 5.1300</span>
                     </td>
                     <td data-value="3.7555">
-                        <span class="fwd-yield medium">3.76</span>
+                        <span class="fwd-yield medium">3.76%</span>
                         
                     </td>
                     <td data-value="2025-11-06">
@@ -654,7 +544,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0001">
                         <div class="symbol">0001</div>
                         <div class="name">長江和記實業<br>CKH Holdings</div>
@@ -663,17 +553,17 @@
                         <span class="price">HKD 63.25</span>
                     </td>
                     <td data-value="2.2240">
-                        <span class="dividend-sum ">HKD 2.2240</span>
+                        <span class="dividend-sum">HKD 2.2240</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="3.5162">
                         <span class="ttm-yield medium">3.52%</span>
                     </td>
                     <td data-value="2.2200">
-                        <span class="fwd-dividend ">HKD 2.2200</span>
+                        <span class="fwd-dividend">HKD 2.2200</span>
                     </td>
                     <td data-value="3.5099">
-                        <span class="fwd-yield medium">3.51</span>
+                        <span class="fwd-yield medium">3.51%</span>
                         
                     </td>
                     <td data-value="2025-09-15">
@@ -681,7 +571,7 @@
                     </td>
                 </tr>
     
-                <tr class="">
+                <tr>
                     <td data-value="0004">
                         <div class="symbol">0004</div>
                         <div class="name">九龍倉集團<br>Wharf Holdings</div>
@@ -690,17 +580,17 @@
                         <span class="price">HKD 25.24</span>
                     </td>
                     <td data-value="0.4000">
-                        <span class="dividend-sum ">HKD 0.4000</span>
+                        <span class="dividend-sum">HKD 0.4000</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="1.5848">
                         <span class="ttm-yield low">1.58%</span>
                     </td>
                     <td data-value="0.4000">
-                        <span class="fwd-dividend ">HKD 0.4000</span>
+                        <span class="fwd-dividend">HKD 0.4000</span>
                     </td>
                     <td data-value="1.5848">
-                        <span class="fwd-yield low">1.58</span>
+                        <span class="fwd-yield low">1.58%</span>
                         
                     </td>
                     <td data-value="2025-08-29">
@@ -708,26 +598,26 @@
                     </td>
                 </tr>
     
-                <tr class="zero-dividend-row">
+                <tr>
                     <td data-value="0022">
-                        <div class="symbol">0022<span class="zero-badge">零息</span></div>
+                        <div class="symbol">0022</div>
                         <div class="name">Global X 國指備兌認購期權主動型ETF<br>Global X HSCEI Covered Call Active ETF</div>
                     </td>
                     <td data-value="0.21">
                         <span class="price">HKD 0.21</span>
                     </td>
                     <td data-value="0.0000">
-                        <span class="dividend-sum zero">HKD 0.0000</span>
+                        <span class="dividend-sum">HKD 0.0000</span>
                         <div class="dividend-count">(2次派息)</div>
                     </td>
                     <td data-value="0.0000">
-                        <span class="ttm-yield zero">0.00%</span>
+                        <span class="ttm-yield low">0.00%</span>
                     </td>
                     <td data-value="0.0000">
-                        <span class="fwd-dividend zero">HKD 0.0000</span>
+                        <span class="fwd-dividend">N/A</span>
                     </td>
                     <td data-value="0.0000">
-                        <span class="fwd-yield zero">0.00</span>
+                        <span class="fwd-yield na">N/A</span>
                         
                     </td>
                     <td data-value="2025-05-13">
@@ -743,24 +633,12 @@
             <p>TTM = Trailing Twelve Months (過去12個月實際派息)</p>
             <p>Forward = 預計未來年度派息 (Yahoo Finance 估計值，可能不準確)</p>
             <p>💡 建議以 TTM 作為主要參考</p>
-            <p>⚪ 灰色行 = 零股息股票</p>
         </div>
     </div>
     
     <script>
         let currentSortCol = -1;
         let currentSortDir = 'desc';
-        let showZeroDividend = true;
-        
-        function toggleZeroDividend(btn) {
-            showZeroDividend = !showZeroDividend;
-            btn.classList.toggle('active', showZeroDividend);
-            
-            const rows = document.querySelectorAll('tr.zero-dividend-row');
-            rows.forEach(row => {
-                row.style.display = showZeroDividend ? '' : 'none';
-            });
-        }
         
         function sortTable(colIndex, type) {
             const table = document.getElementById('stockTable');
