@@ -20,7 +20,7 @@
             color: #fff;
         }
         .container {
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 0 auto;
         }
         h1 {
@@ -178,7 +178,7 @@
         
         table {
             width: 100%;
-            min-width: 950px;
+            min-width: 1000px;
             border-collapse: collapse;
             background: rgba(255, 255, 255, 0.03);
         }
@@ -350,7 +350,7 @@
             color: #888;
         }
         
-        /* Dividend Schedule Cell */
+        /* Dividend Schedule Cell - Updated for year+month */
         .schedule-cell {
             text-align: left;
             padding-left: 8px !important;
@@ -359,7 +359,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
-            max-width: 320px;
+            max-width: 380px;
         }
         .schedule-item {
             background: rgba(96, 165, 250, 0.15);
@@ -368,6 +368,14 @@
             padding: 2px 6px;
             font-size: 0.7em;
             white-space: nowrap;
+        }
+        .schedule-item .year-month {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+        .schedule-item .year {
+            color: #818cf8;
+            font-size: 0.9em;
         }
         .schedule-item .month {
             color: #60a5fa;
@@ -471,7 +479,7 @@
                 min-width: 85px;
             }
             .schedule-container {
-                max-width: 200px;
+                max-width: 240px;
             }
             .schedule-item {
                 font-size: 0.6em;
@@ -514,7 +522,7 @@
         <div class="formula-box">
             <p class="formula"><span class="formula-label">TTM:</span> 過去12個月派息 ÷ 現價 × 100%</p>
             <p class="formula"><span class="formula-label forward">Forward:</span> 預期年度派息 ÷ 現價 × 100%</p>
-            <p class="formula"><span class="formula-label schedule">派息日程:</span> 過去12個月各月份派息金額 (完整小數位)</p>
+            <p class="formula"><span class="formula-label schedule">派息日程:</span> 過去12個月各月份派息金額 (年份+月份)</p>
         </div>
         
         <div class="legend">
@@ -533,7 +541,7 @@
         </div>
         
         <p class="stats">📈 共 16 隻派息股票</p>
-        <p class="update-time">��新: 2026-02-03 00:15:45</p>
+        <p class="update-time">更新: 2026-02-03 00:23:17</p>
         
         <p class="scroll-hint">👆 左右滑動查看完整表格</p>
         <p class="sort-hint">💡 點擊表頭可排序</p>
@@ -561,7 +569,7 @@
                             Fwd%<span class="sort-icon">⇅</span>
                         </th>
                         <th class="col-group-schedule" style="cursor: default;">
-                            派息日程 (月份)
+                            派息日程 (年月)
                         </th>
                     </tr>
                 </thead>
@@ -590,7 +598,7 @@
                         <span class="forward-yield na">N/A</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">4月</span> <span class="amount">$0.06</span></div><div class="schedule-item"><span class="month">5月</span> <span class="amount">$0.181</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年4月</span> <span class="amount">$0.06</span></div><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$0.181</span></div></div>
                     </td>
                 </tr>
     
@@ -617,7 +625,7 @@
                         <span class="forward-yield high">16.82%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">1月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="month">2月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="month">3月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="month">4月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="month">5月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="month">6月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="month">7月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="month">10月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="month">11月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="month">12月</span> <span class="amount">$0.14</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年2月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="year-month">25年3月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="year-month">25年4月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="year-month">25年6月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="year-month">25年7月</span> <span class="amount">$0.15</span></div><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="year-month">25年10月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="year-month">25年11月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="year-month">25年12月</span> <span class="amount">$0.14</span></div><div class="schedule-item"><span class="year-month">26年1月</span> <span class="amount">$0.14</span></div></div>
                     </td>
                 </tr>
     
@@ -644,7 +652,7 @@
                         <span class="forward-yield high">6.46%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">5月</span> <span class="amount">$0.2848</span></div><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.0977</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$0.2848</span></div><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.0977</span></div></div>
                     </td>
                 </tr>
     
@@ -671,7 +679,7 @@
                         <span class="forward-yield medium">5.83%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">6月</span> <span class="amount">$1.30</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.50</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年6月</span> <span class="amount">$1.30</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.50</span></div></div>
                     </td>
                 </tr>
     
@@ -698,7 +706,7 @@
                         <span class="forward-yield medium">5.33%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">5月</span> <span class="amount">$0.65</span></div><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.21</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$0.65</span></div><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.21</span></div></div>
                     </td>
                 </tr>
     
@@ -725,7 +733,7 @@
                         <span class="forward-yield medium">5.27%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">3月</span> <span class="amount">$0.38</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.39</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年3月</span> <span class="amount">$0.38</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.39</span></div></div>
                     </td>
                 </tr>
     
@@ -752,7 +760,7 @@
                         <span class="forward-yield medium">5.10%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">3月</span> <span class="amount">$0.81</span></div><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.27</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年3月</span> <span class="amount">$0.81</span></div><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.27</span></div></div>
                     </td>
                 </tr>
     
@@ -779,7 +787,7 @@
                         <span class="forward-yield medium">4.78%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">6月</span> <span class="amount">$0.23</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.12</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年6月</span> <span class="amount">$0.23</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.12</span></div></div>
                     </td>
                 </tr>
     
@@ -806,7 +814,7 @@
                         <span class="forward-yield medium">4.65%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">5月</span> <span class="amount">$2.04</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.78</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$2.04</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.78</span></div></div>
                     </td>
                 </tr>
     
@@ -833,7 +841,7 @@
                         <span class="forward-yield medium">4.56%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">4月</span> <span class="amount">$2.10</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$1.30</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年4月</span> <span class="amount">$2.10</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$1.30</span></div></div>
                     </td>
                 </tr>
     
@@ -860,7 +868,7 @@
                         <span class="forward-yield ">3.42%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">3月</span> <span class="amount">$1.26</span></div><div class="schedule-item"><span class="month">6月</span> <span class="amount">$0.63</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.63</span></div><div class="schedule-item"><span class="month">12月</span> <span class="amount">$0.63</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年3月</span> <span class="amount">$1.26</span></div><div class="schedule-item"><span class="year-month">25年6月</span> <span class="amount">$0.63</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.63</span></div><div class="schedule-item"><span class="year-month">25年12月</span> <span class="amount">$0.63</span></div></div>
                     </td>
                 </tr>
     
@@ -887,7 +895,7 @@
                         <span class="forward-yield ">3.81%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">3月</span> <span class="amount">$2.791007</span></div><div class="schedule-item"><span class="month">5月</span> <span class="amount">$0.783972</span></div><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.777678</span></div><div class="schedule-item"><span class="month">11月</span> <span class="amount">$0.777722</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年3月</span> <span class="amount">$2.791007</span></div><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$0.783972</span></div><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.777678</span></div><div class="schedule-item"><span class="year-month">25年11月</span> <span class="amount">$0.777722</span></div></div>
                     </td>
                 </tr>
     
@@ -914,7 +922,7 @@
                         <span class="forward-yield ">3.61%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">5月</span> <span class="amount">$1.514</span></div><div class="schedule-item"><span class="month">9月</span> <span class="amount">$0.71</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年5月</span> <span class="amount">$1.514</span></div><div class="schedule-item"><span class="year-month">25年9月</span> <span class="amount">$0.71</span></div></div>
                     </td>
                 </tr>
     
@@ -941,7 +949,7 @@
                         <span class="forward-yield high">16.39%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.01</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.01</span></div></div>
                     </td>
                 </tr>
     
@@ -968,7 +976,7 @@
                         <span class="forward-yield ">3.12%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">3月</span> <span class="amount">$0.95</span></div><div class="schedule-item"><span class="month">11月</span> <span class="amount">$2.80</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年3月</span> <span class="amount">$0.95</span></div><div class="schedule-item"><span class="year-month">25年11月</span> <span class="amount">$2.80</span></div></div>
                     </td>
                 </tr>
     
@@ -995,7 +1003,7 @@
                         <span class="forward-yield low">1.59%</span>
                     </td>
                     <td class="schedule-cell">
-                        <div class="schedule-container"><div class="schedule-item"><span class="month">4月</span> <span class="amount">$0.20</span></div><div class="schedule-item"><span class="month">8月</span> <span class="amount">$0.20</span></div></div>
+                        <div class="schedule-container"><div class="schedule-item"><span class="year-month">25年4月</span> <span class="amount">$0.20</span></div><div class="schedule-item"><span class="year-month">25年8月</span> <span class="amount">$0.20</span></div></div>
                     </td>
                 </tr>
     
@@ -1012,7 +1020,7 @@
         <div class="footer">
             <p>📊 數據來源：Yahoo Finance</p>
             <p>⚠️ 資料僅供參考，不構成投資建議</p>
-            <p>N/A = 無數據 | 派息日程為過去12個月記錄 (顯示完整小數位)</p>
+            <p>N/A = 無數據 | 派息日程為過去12個月記錄</p>
         </div>
     </div>
     
