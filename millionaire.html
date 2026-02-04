@@ -10,12 +10,18 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            overscroll-behavior: none;
         }
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
             background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             overflow-x: hidden;
         }
 
@@ -39,6 +45,7 @@
         #intro-screen.hidden {
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
         }
 
         .intro-container {
@@ -48,10 +55,9 @@
             max-width: 500px;
         }
 
-        /* Premier League Logo Animation */
         .pl-logo {
-            width: clamp(120px, 30vw, 200px);
-            height: clamp(120px, 30vw, 200px);
+            width: clamp(100px, 25vw, 180px);
+            height: clamp(100px, 25vw, 180px);
             margin-bottom: 20px;
             animation: logoFloat 3s ease-in-out infinite, logoGlow 2s ease-in-out infinite alternate;
             filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
@@ -59,7 +65,7 @@
 
         @keyframes logoFloat {
             0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
         }
 
         @keyframes logoGlow {
@@ -67,112 +73,99 @@
             100% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
         }
 
-        /* Football particles */
         .football-particle {
             position: absolute;
-            font-size: clamp(20px, 5vw, 30px);
+            font-size: clamp(16px, 4vw, 28px);
             animation: particleFall linear infinite;
             opacity: 0.7;
+            pointer-events: none;
         }
 
         @keyframes particleFall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
             10% { opacity: 0.7; }
             90% { opacity: 0.7; }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
         .intro-title {
-            font-size: clamp(1.8rem, 8vw, 3.5rem);
+            font-size: clamp(1.6rem, 7vw, 3rem);
             font-weight: 900;
             color: white;
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.5);
             animation: titlePulse 2s ease-in-out infinite;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         @keyframes titlePulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
         }
 
         .intro-subtitle {
-            font-size: clamp(1rem, 4vw, 1.8rem);
+            font-size: clamp(0.95rem, 3.5vw, 1.6rem);
             color: #ffd700;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             animation: fadeInUp 1s ease 0.5s both;
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .start-btn {
-            padding: clamp(15px, 4vw, 20px) clamp(40px, 10vw, 60px);
-            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            padding: clamp(14px, 3.5vw, 20px) clamp(35px, 9vw, 55px);
+            font-size: clamp(1rem, 3.5vw, 1.4rem);
             font-weight: 700;
             color: #38003c;
             background: linear-gradient(135deg, #ffd700, #ffed4a, #ffd700);
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
-            animation: fadeInUp 1s ease 1s both, btnGlow 2s ease-in-out infinite;
-            touch-action: manipulation;
-        }
-
-        @keyframes btnGlow {
-            0%, 100% { box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
-            50% { box-shadow: 0 15px 50px rgba(255, 215, 0, 0.8); }
-        }
-
-        .start-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.8);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+            animation: fadeInUp 1s ease 1s both;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         .start-btn:active {
-            transform: scale(1.05);
+            transform: scale(0.96);
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
         }
 
-        /* Loading bar */
+        @media (hover: hover) and (pointer: fine) {
+            .start-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 12px 35px rgba(255, 215, 0, 0.6);
+            }
+        }
+
         .loading-container {
-            width: min(300px, 80%);
-            margin-top: 30px;
+            width: min(280px, 85%);
+            margin-top: 25px;
             animation: fadeInUp 1s ease 1.5s both;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .loading-container.hidden {
             opacity: 0;
-            visibility: hidden;
+            transform: translateY(-10px);
+            pointer-events: none;
         }
 
         .loading-text {
             color: white;
-            margin-bottom: 10px;
-            font-size: clamp(0.9rem, 3vw, 1rem);
+            margin-bottom: 8px;
+            font-size: clamp(0.85rem, 2.8vw, 1rem);
         }
 
         .loading-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
         }
 
@@ -180,11 +173,10 @@
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, #00ff87, #ffd700);
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 0.3s ease;
         }
 
-        /* Spotlight effect */
         .spotlight {
             position: absolute;
             width: 100%;
@@ -207,12 +199,14 @@
         #game-screen {
             display: none;
             min-height: 100vh;
-            padding: 10px;
+            min-height: -webkit-fill-available;
+            padding: 12px;
+            padding-bottom: calc(12px + env(safe-area-inset-bottom));
         }
 
         #game-screen.active {
             display: block;
-            animation: fadeIn 1s ease;
+            animation: fadeIn 0.8s ease;
         }
 
         @keyframes fadeIn {
@@ -223,220 +217,467 @@
         .game-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
         /* Header */
         .game-header {
-            grid-column: 1 / -1;
             text-align: center;
-            padding: 15px;
-            background: linear-gradient(135deg, rgba(56, 0, 60, 0.9), rgba(0, 255, 135, 0.3));
-            border-radius: 15px;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, rgba(56, 0, 60, 0.95), rgba(0, 255, 135, 0.25));
+            border-radius: 16px;
             border: 2px solid #00ff87;
-            margin-bottom: 10px;
-        }
-
-        .game-header h1 {
-            font-size: clamp(1.1rem, 4vw, 2rem);
-            color: #ffd700;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-        }
-
-        .current-prize {
-            font-size: clamp(1.5rem, 6vw, 2.5rem);
-            color: #00ff87;
-            margin-top: 8px;
-            font-weight: 900;
-            animation: prizeGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes prizeGlow {
-            0% { text-shadow: 0 0 10px rgba(0, 255, 135, 0.5); }
-            100% { text-shadow: 0 0 30px rgba(0, 255, 135, 1), 0 0 50px rgba(0, 255, 135, 0.5); }
-        }
-
-        /* Question Area */
-        .question-area {
-            background: linear-gradient(180deg, #1a1a3e 0%, #0d0d2b 100%);
-            border-radius: 15px;
-            padding: clamp(15px, 4vw, 30px);
-            border: 3px solid #38003c;
-            box-shadow: 0 0 30px rgba(56, 0, 60, 0.5), inset 0 0 50px rgba(0, 255, 135, 0.1);
-        }
-
-        .question-number {
-            color: #00ff87;
-            font-size: clamp(0.9rem, 3vw, 1.2rem);
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .difficulty-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
-        }
-
-        .difficulty-easy { background: #4CAF50; color: white; }
-        .difficulty-medium { background: #FF9800; color: white; }
-        .difficulty-hard { background: #f44336; color: white; }
-        .difficulty-ultimate { background: linear-gradient(135deg, #ffd700, #ff6b6b); color: #38003c; }
-
-        .question-text {
-            font-size: clamp(1rem, 3.5vw, 1.5rem);
-            color: white;
-            margin: 15px 0 20px;
-            line-height: 1.6;
-            padding: clamp(12px, 3vw, 20px);
-            background: linear-gradient(135deg, rgba(56, 0, 60, 0.5), rgba(0, 255, 135, 0.1));
-            border-radius: 12px;
-            border: 2px solid rgba(255, 215, 0, 0.3);
-        }
-
-        .answers-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        .answer-btn {
-            padding: clamp(12px, 3vw, 20px);
-            font-size: clamp(0.85rem, 2.8vw, 1.1rem);
-            color: white;
-            background: linear-gradient(135deg, #2a2a5a, #1a1a3e);
-            border: 2px solid #38003c;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: left;
             position: relative;
             overflow: hidden;
-            touch-action: manipulation;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
         }
 
-        .answer-btn::before {
+        .game-header::before {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: headerShine 3s infinite;
         }
 
-        .answer-btn:hover::before {
-            left: 100%;
+        @keyframes headerShine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
         }
 
-        .answer-btn:hover {
-            background: linear-gradient(135deg, #38003c, #00ff87);
-            border-color: #00ff87;
-            transform: scale(1.02);
-            box-shadow: 0 5px 20px rgba(0, 255, 135, 0.4);
+        .game-header h1 {
+            font-size: clamp(0.95rem, 3.5vw, 1.8rem);
+            color: #ffd700;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            position: relative;
         }
 
-        .answer-btn:active {
+        .header-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .current-prize {
+            font-size: clamp(1.4rem, 5.5vw, 2.2rem);
+            color: #00ff87;
+            font-weight: 900;
+            animation: prizeGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes prizeGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 135, 0.5); }
+            100% { text-shadow: 0 0 25px rgba(0, 255, 135, 1), 0 0 40px rgba(0, 255, 135, 0.5); }
+        }
+
+        .progress-indicator {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.completed {
+            background: #4CAF50;
+        }
+
+        .progress-dot.current {
+            background: #ffd700;
+            transform: scale(1.3);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+        }
+
+        .progress-dot.milestone {
+            border: 2px solid #00ff87;
+            background: transparent;
+        }
+
+        .progress-dot.milestone.completed {
+            background: #00ff87;
+        }
+
+        /* Question Area */
+        .question-area {
+            background: linear-gradient(180deg, #1a1a3e 0%, #0d0d2b 100%);
+            border-radius: 20px;
+            padding: clamp(15px, 4vw, 25px);
+            border: 2px solid #38003c;
+            box-shadow: 0 0 30px rgba(56, 0, 60, 0.5), inset 0 0 50px rgba(0, 255, 135, 0.05);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .question-number {
+            color: #00ff87;
+            font-size: clamp(0.85rem, 2.8vw, 1.1rem);
+            font-weight: 700;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+            font-weight: 600;
+        }
+
+        .difficulty-easy { background: #4CAF50; color: white; }
+        .difficulty-medium { background: #FF9800; color: white; }
+        .difficulty-hard { background: #f44336; color: white; }
+        .difficulty-ultimate { 
+            background: linear-gradient(135deg, #ffd700, #ff6b6b); 
+            color: #38003c;
+            animation: ultimatePulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes ultimatePulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+        }
+
+        .question-text {
+            font-size: clamp(1rem, 3.2vw, 1.35rem);
+            color: white;
+            margin: 0 0 20px;
+            line-height: 1.7;
+            padding: clamp(14px, 3.5vw, 20px);
+            background: linear-gradient(135deg, rgba(56, 0, 60, 0.4), rgba(0, 255, 135, 0.08));
+            border-radius: 14px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        /* Lifelines */
+        .lifelines {
+            display: flex;
+            justify-content: center;
+            gap: clamp(12px, 4vw, 20px);
+            margin-bottom: 18px;
+        }
+
+        .lifeline-btn {
+            width: clamp(52px, 14vw, 65px);
+            height: clamp(52px, 14vw, 65px);
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            background: linear-gradient(145deg, #2a2a5a, #1a1a3e);
+            color: #ffd700;
+            font-size: clamp(0.75rem, 2.8vw, 1.1rem);
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-touch-callout: none;
+            user-select: none;
+            position: relative;
+        }
+
+        .lifeline-btn::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.6);
+            white-space: nowrap;
+        }
+
+        .lifeline-btn:active:not(:disabled) {
+            transform: scale(0.92);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .lifeline-btn:hover:not(:disabled) {
+                background: linear-gradient(135deg, #ffd700, #ff9800);
+                color: #38003c;
+                transform: scale(1.08);
+            }
+        }
+
+        .lifeline-btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            border-color: #666;
+            color: #666;
+        }
+
+        .lifeline-btn:disabled::after {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Answers Grid */
+        .answers-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .answer-btn {
+            padding: clamp(14px, 3.5vw, 18px) clamp(14px, 3.5vw, 20px);
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+            color: white;
+            background: linear-gradient(135deg, #2a2a5a, #1a1a3e);
+            border: 2px solid #38003c;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 56px;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        .answer-btn:active:not(:disabled):not(.selected):not(.correct):not(.wrong) {
             transform: scale(0.98);
+            background: linear-gradient(135deg, #3a3a6a, #2a2a4e);
+            border-color: #00ff87;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .answer-btn:hover:not(:disabled):not(.selected):not(.correct):not(.wrong) {
+                background: linear-gradient(135deg, #38003c, #00ff87);
+                border-color: #00ff87;
+                transform: scale(1.01);
+            }
         }
 
         .answer-btn.selected {
-            background: linear-gradient(135deg, #ffd700, #ff9800);
+            background: linear-gradient(135deg, #ffd700, #e6ac00);
             border-color: #ffd700;
-            animation: selectedPulse 1s ease-in-out infinite;
+            color: #38003c;
+            animation: selectedPulse 0.8s ease-in-out infinite;
         }
 
         @keyframes selectedPulse {
-            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
-            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.9); }
         }
 
         .answer-btn.correct {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
             border-color: #4CAF50;
-            animation: correctAnswer 0.5s ease;
+            animation: correctBounce 0.5s ease;
         }
 
-        @keyframes correctAnswer {
-            0%, 50%, 100% { transform: scale(1); }
-            25%, 75% { transform: scale(1.05); }
+        @keyframes correctBounce {
+            0%, 100% { transform: scale(1); }
+            30% { transform: scale(1.03); }
+            60% { transform: scale(0.98); }
         }
 
         .answer-btn.wrong {
-            background: linear-gradient(135deg, #f44336, #d32f2f);
+            background: linear-gradient(135deg, #f44336, #c62828);
             border-color: #f44336;
-            animation: wrongAnswer 0.5s ease;
+            animation: wrongShake 0.5s ease;
         }
 
-        @keyframes wrongAnswer {
+        @keyframes wrongShake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
         }
 
         .answer-btn:disabled {
             cursor: not-allowed;
-            opacity: 0.7;
         }
 
         .answer-btn.hidden-answer {
-            visibility: hidden;
+            opacity: 0;
+            transform: scale(0.9);
             pointer-events: none;
+            min-height: 0;
+            padding: 0;
+            margin: 0;
+            border: none;
+            height: 0;
+            overflow: hidden;
         }
 
         .answer-letter {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: clamp(28px, 6vw, 35px);
-            height: clamp(28px, 6vw, 35px);
-            min-width: clamp(28px, 6vw, 35px);
+            width: clamp(30px, 8vw, 38px);
+            height: clamp(30px, 8vw, 38px);
+            min-width: clamp(30px, 8vw, 38px);
             background: linear-gradient(135deg, #ffd700, #ff9800);
             color: #38003c;
             border-radius: 50%;
             font-weight: 900;
-            margin-right: clamp(8px, 2vw, 15px);
-            font-size: clamp(0.8rem, 2.5vw, 1rem);
+            margin-right: clamp(10px, 3vw, 15px);
+            font-size: clamp(0.85rem, 2.8vw, 1rem);
+            flex-shrink: 0;
         }
 
-        /* Money Ladder */
-        .money-ladder {
+        .answer-btn.selected .answer-letter,
+        .answer-btn.correct .answer-letter,
+        .answer-btn.wrong .answer-letter {
+            background: rgba(255, 255, 255, 0.3);
+            color: inherit;
+        }
+
+        .answer-text {
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .walk-away-btn {
+            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 28px);
+            font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+            color: #ffd700;
+            background: transparent;
+            border: 2px solid #ffd700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        .walk-away-btn:active {
+            transform: scale(0.96);
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .walk-away-btn:hover {
+                background: #ffd700;
+                color: #38003c;
+            }
+        }
+
+        .ladder-btn {
+            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 28px);
+            font-size: clamp(0.85rem, 2.8vw, 0.95rem);
+            color: #00ff87;
+            background: transparent;
+            border: 2px solid #00ff87;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.2s ease;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        .ladder-btn:active {
+            transform: scale(0.96);
+            background: rgba(0, 255, 135, 0.1);
+        }
+
+        /* Money Ladder Modal */
+        .ladder-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1500;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .ladder-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .ladder-content {
             background: linear-gradient(180deg, #1a1a3e 0%, #0d0d2b 100%);
-            border-radius: 15px;
-            padding: 15px;
-            border: 3px solid #38003c;
-            box-shadow: 0 0 30px rgba(56, 0, 60, 0.5);
-            max-height: calc(100vh - 200px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+            max-width: 350px;
+            width: 100%;
+            max-height: 80vh;
             overflow-y: auto;
         }
 
-        .ladder-title {
-            text-align: center;
-            color: #ffd700;
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            margin-bottom: 12px;
+        .ladder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
             padding-bottom: 12px;
             border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .ladder-title {
+            color: #ffd700;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .ladder-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+            background: transparent;
+            color: #ffd700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ladder-close:active {
+            background: #ffd700;
+            color: #38003c;
         }
 
         .ladder-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 12px;
+            padding: 10px 14px;
             margin: 4px 0;
-            border-radius: 8px;
-            font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+            border-radius: 10px;
+            font-size: 0.9rem;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.05);
         }
@@ -445,12 +686,12 @@
             background: linear-gradient(135deg, #ffd700, #ff9800);
             color: #38003c;
             font-weight: 700;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transform: scale(1.03);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
         .ladder-item.completed {
-            background: linear-gradient(135deg, #4CAF50, #45a049);
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
             color: white;
         }
 
@@ -460,6 +701,7 @@
 
         .ladder-item .q-num {
             color: #00ff87;
+            font-weight: 600;
         }
 
         .ladder-item.current .q-num,
@@ -477,45 +719,6 @@
             color: inherit;
         }
 
-        /* Lifelines */
-        .lifelines {
-            display: flex;
-            justify-content: center;
-            gap: clamp(10px, 3vw, 20px);
-            margin: 20px 0;
-        }
-
-        .lifeline-btn {
-            width: clamp(50px, 12vw, 60px);
-            height: clamp(50px, 12vw, 60px);
-            border-radius: 50%;
-            border: 3px solid #ffd700;
-            background: linear-gradient(135deg, #2a2a5a, #1a1a3e);
-            color: #ffd700;
-            font-size: clamp(0.9rem, 3vw, 1.5rem);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            touch-action: manipulation;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lifeline-btn:hover:not(:disabled) {
-            background: linear-gradient(135deg, #ffd700, #ff9800);
-            color: #38003c;
-            transform: scale(1.1);
-        }
-
-        .lifeline-btn:active:not(:disabled) {
-            transform: scale(1.05);
-        }
-
-        .lifeline-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
         /* Result Modal */
         .modal {
             position: fixed;
@@ -523,7 +726,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.92);
             display: none;
             justify-content: center;
             align-items: center;
@@ -540,32 +743,33 @@
             background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
             border: 3px solid #ffd700;
             border-radius: 25px;
-            padding: clamp(30px, 8vw, 50px);
+            padding: clamp(25px, 7vw, 45px);
             text-align: center;
-            max-width: 500px;
+            max-width: 420px;
             width: 100%;
             box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
         }
 
         .modal-icon {
-            font-size: clamp(3rem, 15vw, 5rem);
+            font-size: clamp(3.5rem, 18vw, 5.5rem);
             margin-bottom: 15px;
             animation: iconBounce 1s ease infinite;
         }
 
         @keyframes iconBounce {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.1) rotate(-5deg); }
+            75% { transform: scale(1.1) rotate(5deg); }
         }
 
         .modal-title {
-            font-size: clamp(1.3rem, 5vw, 2rem);
+            font-size: clamp(1.2rem, 5vw, 1.8rem);
             color: #ffd700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .modal-prize {
-            font-size: clamp(2rem, 8vw, 3rem);
+            font-size: clamp(1.8rem, 8vw, 2.8rem);
             color: #00ff87;
             font-weight: 900;
             margin-bottom: 25px;
@@ -573,46 +777,153 @@
         }
 
         .modal-btn {
-            padding: clamp(12px, 3vw, 15px) clamp(30px, 8vw, 40px);
-            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            padding: clamp(12px, 3vw, 16px) clamp(28px, 8vw, 40px);
+            font-size: clamp(1rem, 3.5vw, 1.15rem);
             color: #38003c;
             background: linear-gradient(135deg, #ffd700, #ff9800);
             border: none;
             border-radius: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease;
             font-weight: 700;
-            touch-action: manipulation;
-        }
-
-        .modal-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         .modal-btn:active {
-            transform: scale(1.05);
+            transform: scale(0.96);
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .modal-btn:hover {
+                transform: scale(1.05);
+                box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            }
+        }
+
+        /* Custom Alert Modal */
+        .alert-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        .alert-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .alert-content {
+            background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: clamp(20px, 5vw, 30px);
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            color: white;
+        }
+
+        .alert-text {
+            font-size: clamp(1rem, 3.2vw, 1.15rem);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+
+        .alert-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .alert-btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            -webkit-touch-callout: none;
+            user-select: none;
+        }
+
+        .alert-btn:active {
+            transform: scale(0.96);
+        }
+
+        .alert-btn.primary {
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            color: #38003c;
+        }
+
+        .alert-btn.confirm {
+            background: linear-gradient(135deg, #4CAF50, #388E3C);
+            color: white;
+        }
+
+        .alert-btn.cancel {
+            background: linear-gradient(135deg, #666, #444);
+            color: white;
+        }
+
+        /* Audience Vote Bars */
+        .vote-bar-container {
+            text-align: left;
+            margin: 8px 0;
+        }
+
+        .vote-bar-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        .vote-bar {
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .vote-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff87, #ffd700);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #38003c;
         }
 
         /* Confetti */
         .confetti {
             position: fixed;
             top: -10px;
-            font-size: 20px;
+            font-size: 22px;
             animation: confettiFall linear forwards;
             z-index: 2001;
             pointer-events: none;
         }
 
         @keyframes confettiFall {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(720deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
         }
 
         /* Sound toggle */
@@ -620,218 +931,154 @@
             position: fixed;
             bottom: 15px;
             right: 15px;
-            width: clamp(40px, 10vw, 50px);
-            height: clamp(40px, 10vw, 50px);
+            width: clamp(44px, 11vw, 50px);
+            height: clamp(44px, 11vw, 50px);
             border-radius: 50%;
             border: 2px solid #ffd700;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             color: #ffd700;
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
+            font-size: clamp(1.1rem, 4vw, 1.4rem);
             cursor: pointer;
             z-index: 100;
-            transition: all 0.3s ease;
-            touch-action: manipulation;
+            transition: transform 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
+            -webkit-touch-callout: none;
+            user-select: none;
+            backdrop-filter: blur(5px);
         }
 
-        .sound-toggle:hover {
-            background: #ffd700;
-            color: #38003c;
+        .sound-toggle:active {
+            transform: scale(0.92);
         }
 
-        /* Footer credits */
+        /* Footer */
         .footer-credits {
-            grid-column: 1 / -1;
             text-align: center;
             padding: 15px;
-            color: rgba(255, 255, 255, 0.5);
-            font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+            color: rgba(255, 255, 255, 0.4);
+            font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+            margin-top: 10px;
         }
 
-        /* Walk Away Button */
-        .walk-away-btn {
-            margin-top: 15px;
-            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 30px);
-            font-size: clamp(0.85rem, 2.8vw, 1rem);
-            color: #ffd700;
-            background: transparent;
-            border: 2px solid #ffd700;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            touch-action: manipulation;
-        }
-
-        .walk-away-btn:hover {
-            background: #ffd700;
-            color: #38003c;
-        }
-
-        .walk-away-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* Mobile Ladder Toggle */
-        .ladder-toggle {
-            display: none;
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #38003c, #00ff87);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 10px;
-            touch-action: manipulation;
-        }
-
-        /* ===== MOBILE RESPONSIVE ===== */
-        @media (max-width: 900px) {
+        /* Desktop Layout */
+        @media (min-width: 768px) {
             .game-container {
-                grid-template-columns: 1fr;
-                gap: 15px;
+                display: grid;
+                grid-template-columns: 1fr 280px;
+                gap: 25px;
             }
 
-            .money-ladder {
-                display: none;
-                max-height: 300px;
-            }
-
-            .money-ladder.show {
-                display: block;
-            }
-
-            .ladder-toggle {
-                display: block;
-            }
-
-            .ladder-items-mobile-wrapper {
-                order: 2;
+            .game-header {
+                grid-column: 1 / -1;
             }
 
             .question-area {
                 order: 1;
             }
-        }
 
-        @media (max-width: 600px) {
-            #game-screen {
-                padding: 8px;
+            .desktop-ladder {
+                display: block;
+                order: 2;
+            }
+
+            .ladder-btn {
+                display: none;
+            }
+
+            .footer-credits {
+                grid-column: 1 / -1;
             }
 
             .answers-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
             }
 
-            .answer-btn {
-                min-height: 55px;
-            }
-
-            .game-header {
-                padding: 12px;
-                border-radius: 12px;
-            }
-
-            .question-area {
-                border-radius: 12px;
-                padding: 12px;
-            }
-
-            .money-ladder {
-                border-radius: 12px;
-            }
-
-            .lifelines {
-                gap: 15px;
-            }
-
-            .ladder-item {
-                padding: 6px 10px;
-                font-size: 0.8rem;
+            .answer-btn.hidden-answer {
+                height: auto;
+                min-height: 56px;
+                visibility: hidden;
             }
         }
 
-        @media (max-width: 380px) {
-            .intro-title {
-                font-size: 1.5rem;
-            }
-
-            .intro-subtitle {
-                font-size: 0.9rem;
-            }
-
-            .start-btn {
-                padding: 12px 30px;
-                font-size: 1rem;
-            }
-
-            .answer-btn {
-                padding: 10px;
-                font-size: 0.8rem;
-            }
-
-            .answer-letter {
-                width: 25px;
-                height: 25px;
-                min-width: 25px;
-                font-size: 0.75rem;
-                margin-right: 8px;
-            }
-
-            .lifeline-btn {
-                width: 45px;
-                height: 45px;
-                font-size: 0.85rem;
-            }
+        .desktop-ladder {
+            display: none;
+            background: linear-gradient(180deg, #1a1a3e 0%, #0d0d2b 100%);
+            border-radius: 18px;
+            padding: 18px;
+            border: 2px solid #38003c;
+            box-shadow: 0 0 25px rgba(56, 0, 60, 0.5);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
         }
 
-        /* Landscape phone optimization */
+        .desktop-ladder .ladder-title {
+            text-align: center;
+            color: #ffd700;
+            font-size: 1.15rem;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        /* Landscape phone */
         @media (max-height: 500px) and (orientation: landscape) {
             #intro-screen {
                 padding: 10px;
             }
 
             .pl-logo {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 10px;
+                width: 70px;
+                height: 70px;
+                margin-bottom: 8px;
             }
 
             .intro-title {
-                font-size: 1.5rem;
-                margin-bottom: 5px;
+                font-size: 1.4rem;
+                margin-bottom: 4px;
             }
 
             .intro-subtitle {
-                font-size: 0.9rem;
-                margin-bottom: 15px;
-            }
-
-            .start-btn {
-                padding: 10px 30px;
-                font-size: 1rem;
+                font-size: 0.85rem;
+                margin-bottom: 12px;
             }
 
             .loading-container {
-                margin-top: 15px;
+                margin-top: 12px;
             }
 
             .game-header {
-                padding: 8px;
+                padding: 8px 12px;
             }
 
             .question-text {
-                margin: 10px 0;
+                margin: 0 0 12px;
                 padding: 10px;
             }
 
             .lifelines {
-                margin: 10px 0;
+                margin-bottom: 12px;
+            }
+
+            .lifeline-btn::after {
+                display: none;
+            }
+        }
+
+        /* Safe area for notched phones */
+        @supports (padding: max(0px)) {
+            .game-header {
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+            }
+
+            .question-area {
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
             }
         }
     </style>
@@ -840,12 +1087,9 @@
     <!-- ===== INTRO SCREEN ===== -->
     <div id="intro-screen">
         <div class="spotlight"></div>
-        
-        <!-- Football Particles -->
         <div id="particles-container"></div>
         
         <div class="intro-container">
-            <!-- Premier League Logo -->
             <svg class="pl-logo" viewBox="0 0 100 100">
                 <defs>
                     <linearGradient id="lionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -863,7 +1107,7 @@
             <h1 class="intro-title">🏆 英超百萬富翁</h1>
             <p class="intro-subtitle">2025-26 賽季特別版 💰</p>
             
-            <button class="start-btn" onclick="startGame()">
+            <button class="start-btn" id="start-btn">
                 開始挑戰 🚀
             </button>
             
@@ -881,23 +1125,17 @@
         <div class="game-container">
             <div class="game-header">
                 <h1>🏆 英超百萬富翁 2025-26</h1>
-                <div class="current-prize" id="current-prize">$0</div>
-            </div>
-
-            <!-- Mobile Ladder Toggle -->
-            <div class="ladder-items-mobile-wrapper">
-                <button class="ladder-toggle" id="ladder-toggle" onclick="toggleLadder()">
-                    📊 顯示獎金階梯
-                </button>
-                <div class="money-ladder" id="money-ladder">
-                    <div class="ladder-title">💰 獎金階梯</div>
-                    <div id="ladder-items"></div>
+                <div class="header-stats">
+                    <div class="current-prize" id="current-prize">$0</div>
+                    <div class="progress-indicator" id="progress-indicator"></div>
                 </div>
             </div>
 
             <div class="question-area">
-                <div class="question-number">
-                    題目 <span id="q-number">1</span>/15
+                <div class="question-header">
+                    <div class="question-number">
+                        題目 <span id="q-number">1</span>/15
+                    </div>
                     <span class="difficulty-badge" id="difficulty-badge">簡單</span>
                 </div>
                 
@@ -906,39 +1144,46 @@
                 </div>
 
                 <div class="lifelines">
-                    <button class="lifeline-btn" id="lifeline-5050" onclick="useFiftyFifty()" title="50:50">
+                    <button class="lifeline-btn" id="lifeline-5050" data-label="50:50">
                         50:50
                     </button>
-                    <button class="lifeline-btn" id="lifeline-phone" onclick="usePhoneFriend()" title="打電話問朋友">
+                    <button class="lifeline-btn" id="lifeline-phone" data-label="問朋友">
                         📞
                     </button>
-                    <button class="lifeline-btn" id="lifeline-audience" onclick="useAskAudience()" title="問現場觀眾">
+                    <button class="lifeline-btn" id="lifeline-audience" data-label="問觀眾">
                         👥
                     </button>
                 </div>
 
                 <div class="answers-grid" id="answers-grid">
-                    <button class="answer-btn" onclick="selectAnswer(0)">
+                    <button class="answer-btn" data-index="0">
                         <span class="answer-letter">A</span>
                         <span class="answer-text">答案 A</span>
                     </button>
-                    <button class="answer-btn" onclick="selectAnswer(1)">
+                    <button class="answer-btn" data-index="1">
                         <span class="answer-letter">B</span>
                         <span class="answer-text">答案 B</span>
                     </button>
-                    <button class="answer-btn" onclick="selectAnswer(2)">
+                    <button class="answer-btn" data-index="2">
                         <span class="answer-letter">C</span>
                         <span class="answer-text">答案 C</span>
                     </button>
-                    <button class="answer-btn" onclick="selectAnswer(3)">
+                    <button class="answer-btn" data-index="3">
                         <span class="answer-letter">D</span>
                         <span class="answer-text">答案 D</span>
                     </button>
                 </div>
 
-                <div style="text-align: center;">
-                    <button class="walk-away-btn" onclick="walkAway()">💼 袋住先走</button>
+                <div class="action-buttons">
+                    <button class="ladder-btn" id="ladder-btn">📊 獎金階梯</button>
+                    <button class="walk-away-btn" id="walk-away-btn">💼 袋住先走</button>
                 </div>
+            </div>
+
+            <!-- Desktop Ladder -->
+            <div class="desktop-ladder" id="desktop-ladder">
+                <div class="ladder-title">💰 獎金階梯</div>
+                <div id="desktop-ladder-items"></div>
             </div>
 
             <div class="footer-credits">
@@ -948,174 +1193,69 @@
         </div>
     </div>
 
+    <!-- ===== LADDER MODAL (Mobile) ===== -->
+    <div class="ladder-modal" id="ladder-modal">
+        <div class="ladder-content">
+            <div class="ladder-header">
+                <div class="ladder-title">💰 獎金階梯</div>
+                <button class="ladder-close" id="ladder-close">✕</button>
+            </div>
+            <div id="ladder-items"></div>
+        </div>
+    </div>
+
     <!-- ===== RESULT MODAL ===== -->
     <div class="modal" id="result-modal">
         <div class="modal-content">
             <div class="modal-icon" id="modal-icon">🏆</div>
             <h2 class="modal-title" id="modal-title">恭喜你！</h2>
             <div class="modal-prize" id="modal-prize">$10,000,000</div>
-            <button class="modal-btn" onclick="restartGame()">再玩一次 🔄</button>
+            <button class="modal-btn" id="restart-btn">再玩一次 🔄</button>
+        </div>
+    </div>
+
+    <!-- ===== ALERT MODAL ===== -->
+    <div class="alert-modal" id="alert-modal">
+        <div class="alert-content" id="alert-content">
+            <div class="alert-text" id="alert-text"></div>
+            <div class="alert-buttons" id="alert-buttons"></div>
         </div>
     </div>
 
     <!-- Sound Toggle -->
-    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()">🔊</button>
+    <button class="sound-toggle" id="sound-toggle">🔊</button>
 
     <script>
         // ===== GAME DATA =====
         const questions = [
-            {
-                id: 1,
-                prize: "$1,000",
-                prizeValue: 1000,
-                difficulty: "簡單",
-                question: "2025-26賽季係英超聯賽嘅第幾個賽季？",
-                answers: ["第32個", "第33個", "第34個", "第35個"],
-                correct: 2
-            },
-            {
-                id: 2,
-                prize: "$2,000",
-                prizeValue: 2000,
-                difficulty: "簡單",
-                question: "邊支球隊係2024-25賽季英超冠軍？",
-                answers: ["曼城", "阿仙奴", "利物浦", "車路士"],
-                correct: 2
-            },
-            {
-                id: 3,
-                prize: "$3,000",
-                prizeValue: 3000,
-                difficulty: "簡單",
-                question: "曼聯喺2024-25賽季英超排第幾？",
-                answers: ["第12名", "第13名", "第15名", "第17名"],
-                correct: 2
-            },
-            {
-                id: 4,
-                prize: "$5,000",
-                prizeValue: 5000,
-                difficulty: "簡單",
-                question: "以下邊支球隊喺2025-26賽季重返英超？",
-                answers: ["諾定咸森林", "桑德蘭", "李斯特城", "修咸頓"],
-                correct: 1
-            },
-            {
-                id: 5,
-                prize: "$10,000",
-                prizeValue: 10000,
-                difficulty: "簡單",
-                milestone: true,
-                question: "曼聯2025-26賽季揭幕戰嘅對手係邊支球隊？",
-                answers: ["利物浦", "曼城", "阿仙奴", "車路士"],
-                correct: 2
-            },
-            {
-                id: 6,
-                prize: "$20,000",
-                prizeValue: 20000,
-                difficulty: "中等",
-                question: "桑德蘭重返英超之前，缺席咗幾多年？",
-                answers: ["5年", "6年", "8年", "10年"],
-                correct: 2
-            },
-            {
-                id: 7,
-                prize: "$40,000",
-                prizeValue: 40000,
-                difficulty: "中等",
-                question: "拉舒福特（Marcus Rashford）喺2025-26賽季外借去邊支球隊？",
-                answers: ["皇家馬德里", "AC米蘭", "巴塞隆拿", "祖雲達斯"],
-                correct: 2
-            },
-            {
-                id: 8,
-                prize: "$80,000",
-                prizeValue: 80000,
-                difficulty: "中等",
-                question: "2025-26賽季邊支球隊第一次用新球場比賽？",
-                answers: ["曼聯", "愛華頓", "車路士", "熱刺"],
-                correct: 1
-            },
-            {
-                id: 9,
-                prize: "$160,000",
-                prizeValue: 160000,
-                difficulty: "中等",
-                question: "曼聯用幾多轉會費簽下賓福特嘅恩布莫（Bryan Mbeumo）？",
-                answers: ["5000萬英鎊", "6000萬英鎊", "7100萬英鎊", "8000萬英鎊"],
-                correct: 2
-            },
-            {
-                id: 10,
-                prize: "$320,000",
-                prizeValue: 320000,
-                difficulty: "困難",
-                milestone: true,
-                question: "2025-26賽季第一個被炒嘅領隊係邊個？",
-                answers: ["每特（Graham Potter）", "聖圖（Nuno Espírito Santo）", "佩雷拉（Vítor Pereira）", "普高歸高（Ange Postecoglou）"],
-                correct: 1
-            },
-            {
-                id: 11,
-                prize: "$640,000",
-                prizeValue: 640000,
-                difficulty: "困難",
-                question: "曼聯喺2026年1月炒咗荒莫臣（Ruben Amorim）之後，邊個正式接任？",
-                answers: ["弗萊切（Darren Fletcher）", "卡里克（Michael Carrick）", "蘇荊赤（Ole Gunnar Solskjær）", "傑斯（Ryan Giggs）"],
-                correct: 1
-            },
-            {
-                id: 12,
-                prize: "$1,250,000",
-                prizeValue: 1250000,
-                difficulty: "困難",
-                question: "2025-26賽季，邊間公司取代Nike成為英超官方比賽用球供應商？",
-                answers: ["Adidas", "Puma", "Mitre", "Umbro"],
-                correct: 1
-            },
-            {
-                id: 13,
-                prize: "$2,500,000",
-                prizeValue: 2500000,
-                difficulty: "終極",
-                question: "由於曼聯喺兩項盃賽首輪出局，佢哋本賽季只需要踢幾多場正式比賽，係自1914-15賽季以嚟最少？",
-                answers: ["38場", "40場", "42場", "44場"],
-                correct: 1
-            },
-            {
-                id: 14,
-                prize: "$5,000,000",
-                prizeValue: 5000000,
-                difficulty: "終極",
-                question: "曼聯喺2025-26賽季足總盃第三圈俾邊支球隊淘汰，係自2013-14賽季以嚟首次喺第三圈出局？",
-                answers: ["水晶宮", "白禮頓", "伯恩茅斯", "富咸"],
-                correct: 1
-            },
-            {
-                id: 15,
-                prize: "$10,000,000",
-                prizeValue: 10000000,
-                difficulty: "終極",
-                question: "2025-26英超賽季20支球隊嘅總球場容量係幾多？",
-                answers: ["750,000", "800,000", "846,049", "900,000"],
-                correct: 2
-            }
+            { id: 1, prize: "$1,000", prizeValue: 1000, difficulty: "簡單", question: "2025-26賽季係英超聯賽嘅第幾個賽季？", answers: ["第32個", "第33個", "第34個", "第35個"], correct: 2 },
+            { id: 2, prize: "$2,000", prizeValue: 2000, difficulty: "簡單", question: "邊支球隊係2024-25賽季英超冠軍？", answers: ["曼城", "阿仙奴", "利物浦", "車路士"], correct: 2 },
+            { id: 3, prize: "$3,000", prizeValue: 3000, difficulty: "簡單", question: "曼聯喺2024-25賽季英超排第幾？", answers: ["第12名", "第13名", "第15名", "第17名"], correct: 2 },
+            { id: 4, prize: "$5,000", prizeValue: 5000, difficulty: "簡單", question: "以下邊支球隊喺2025-26賽季重返英超？", answers: ["諾定咸森林", "桑德蘭", "李斯特城", "修咸頓"], correct: 1 },
+            { id: 5, prize: "$10,000", prizeValue: 10000, difficulty: "簡單", milestone: true, question: "曼聯2025-26賽季揭幕戰嘅對手係邊支球隊？", answers: ["利物浦", "曼城", "阿仙奴", "車路士"], correct: 2 },
+            { id: 6, prize: "$20,000", prizeValue: 20000, difficulty: "中等", question: "桑德蘭重返英超之前，缺席咗幾多年？", answers: ["5年", "6年", "8年", "10年"], correct: 2 },
+            { id: 7, prize: "$40,000", prizeValue: 40000, difficulty: "中等", question: "拉舒福特（Marcus Rashford）喺2025-26賽季外借去邊支球隊？", answers: ["皇家馬德里", "AC米蘭", "巴塞隆拿", "祖雲達斯"], correct: 2 },
+            { id: 8, prize: "$80,000", prizeValue: 80000, difficulty: "中等", question: "2025-26賽季邊支球隊第一次用新球場比賽？", answers: ["曼聯", "愛華頓", "車路士", "熱刺"], correct: 1 },
+            { id: 9, prize: "$160,000", prizeValue: 160000, difficulty: "中等", question: "曼聯用幾多轉會費簽下賓福特嘅恩布莫（Bryan Mbeumo）？", answers: ["5000萬英鎊", "6000萬英鎊", "7100萬英鎊", "8000萬英鎊"], correct: 2 },
+            { id: 10, prize: "$320,000", prizeValue: 320000, difficulty: "困難", milestone: true, question: "2025-26賽季第一個被炒嘅領隊係邊個？", answers: ["每特（Graham Potter）", "聖圖（Nuno Espírito Santo）", "佩雷拉（Vítor Pereira）", "普高歸高（Ange Postecoglou）"], correct: 1 },
+            { id: 11, prize: "$640,000", prizeValue: 640000, difficulty: "困難", question: "曼聯喺2026年1月炒咗荒莫臣（Ruben Amorim）之後，邊個正式接任？", answers: ["弗萊切（Darren Fletcher）", "卡里克（Michael Carrick）", "蘇荊赤（Ole Gunnar Solskjær）", "傑斯（Ryan Giggs）"], correct: 1 },
+            { id: 12, prize: "$1,250,000", prizeValue: 1250000, difficulty: "困難", question: "2025-26賽季，邊間公司取代Nike成為英超官方比賽用球供應商？", answers: ["Adidas", "Puma", "Mitre", "Umbro"], correct: 1 },
+            { id: 13, prize: "$2,500,000", prizeValue: 2500000, difficulty: "終極", question: "由於曼聯喺兩項盃賽首輪出局，佢哋本賽季只需要踢幾多場正式比賽，係自1914-15賽季以嚟最少？", answers: ["38場", "40場", "42場", "44場"], correct: 1 },
+            { id: 14, prize: "$5,000,000", prizeValue: 5000000, difficulty: "終極", question: "曼聯喺2025-26賽季足總盃第三圈俾邊支球隊淘汰，係自2013-14賽季以嚟首次喺第三圈出局？", answers: ["水晶宮", "白禮頓", "伯恩茅斯", "富咸"], correct: 1 },
+            { id: 15, prize: "$10,000,000", prizeValue: 10000000, difficulty: "終極", question: "2025-26英超賽季20支球隊嘅總球場容量係幾多？", answers: ["750,000", "800,000", "846,049", "900,000"], correct: 2 }
         ];
-
-        const milestones = [10000, 320000]; // Q5 and Q10 are milestones
 
         // ===== GAME STATE =====
         let currentQuestion = 0;
         let currentPrize = 0;
         let guaranteedPrize = 0;
         let soundEnabled = true;
-        let ladderVisible = false;
-        let lifelines = {
-            fiftyFifty: true,
-            phoneFriend: true,
-            askAudience: true
-        };
+        let isProcessing = false;
+        let lifelines = { fiftyFifty: true, phoneFriend: true, askAudience: true };
+
+        // ===== DOM ELEMENTS =====
+        const $ = id => document.getElementById(id);
+        const $$ = sel => document.querySelectorAll(sel);
 
         // ===== AUDIO =====
         let audioContext = null;
@@ -1131,390 +1271,333 @@
         
         function playSound(type) {
             if (!soundEnabled) return;
-            
             try {
                 initAudio();
-                
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
-                
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
                 
-                switch(type) {
-                    case 'correct':
-                        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
-                        oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
-                        oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
-                        break;
-                    case 'wrong':
-                        oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
-                        oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.2);
-                        break;
-                    case 'select':
-                        oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
-                        break;
-                    case 'win':
-                        oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
-                        oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.15);
-                        oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.3);
-                        oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.45);
-                        break;
-                }
+                const freqs = {
+                    correct: [[523.25, 0], [659.25, 0.1], [783.99, 0.2]],
+                    wrong: [[200, 0], [150, 0.2]],
+                    select: [[400, 0]],
+                    win: [[523.25, 0], [659.25, 0.15], [783.99, 0.3], [1046.50, 0.45]]
+                };
                 
-                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                (freqs[type] || freqs.select).forEach(([freq, time]) => {
+                    oscillator.frequency.setValueAtTime(freq, audioContext.currentTime + time);
+                });
+                
+                gainNode.gain.setValueAtTime(0.25, audioContext.currentTime);
                 gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-                
                 oscillator.start(audioContext.currentTime);
-                oscillator.stop(audioContext.currentTime + 0.5);
-            } catch(e) {
-                console.log('Audio not supported');
-            }
+                oscillator.stop(audioContext.currentTime + 0.6);
+            } catch(e) {}
         }
 
-        // ===== INTRO ANIMATION =====
+        // ===== INTRO =====
         function createParticles() {
-            const container = document.getElementById('particles-container');
+            const container = $('particles-container');
             if (!container) return;
+            const emojis = ['⚽', '🏆', '⭐', '💰', '🎯'];
             
-            const emojis = ['⚽', '🏆', '⭐', '💰', '🎯', '🥅'];
-            
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 12; i++) {
                 setTimeout(() => {
                     const particle = document.createElement('div');
                     particle.className = 'football-particle';
                     particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                     particle.style.left = Math.random() * 100 + 'vw';
-                    particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
                     container.appendChild(particle);
-                    
-                    setTimeout(() => particle.remove(), 7000);
-                }, i * 200);
+                    setTimeout(() => particle.remove(), 6000);
+                }, i * 250);
             }
         }
 
         function animateLoading() {
-            const progress = document.getElementById('loading-progress');
-            const loadingContainer = document.getElementById('loading-container');
-            const loadingText = document.getElementById('loading-text');
+            const progress = $('loading-progress');
+            const container = $('loading-container');
+            const text = $('loading-text');
             let width = 0;
             
             const interval = setInterval(() => {
-                width += Math.random() * 15;
+                width += Math.random() * 18 + 5;
                 if (width >= 100) {
                     width = 100;
-                    progress.style.width = width + '%';
+                    progress.style.width = '100%';
                     clearInterval(interval);
-                    
-                    // Update text and hide after completion
-                    loadingText.textContent = '載入完成！✓';
-                    
-                    setTimeout(() => {
-                        loadingContainer.classList.add('hidden');
-                    }, 800);
+                    text.textContent = '載入完成 ✓';
+                    setTimeout(() => container.classList.add('hidden'), 600);
                 } else {
                     progress.style.width = width + '%';
                 }
-            }, 200);
+            }, 150);
+        }
+
+        function startGame() {
+            initAudio();
+            playSound('select');
+            $('intro-screen').classList.add('hidden');
+            setTimeout(() => {
+                $('game-screen').classList.add('active');
+                initGame();
+            }, 800);
         }
 
         // ===== GAME FUNCTIONS =====
-        function startGame() {
-            const introScreen = document.getElementById('intro-screen');
-            const gameScreen = document.getElementById('game-screen');
-            
-            initAudio();
-            playSound('select');
-            
-            introScreen.classList.add('hidden');
-            
-            setTimeout(() => {
-                gameScreen.classList.add('active');
-                initGame();
-            }, 1000);
-        }
-
         function initGame() {
             currentQuestion = 0;
             currentPrize = 0;
             guaranteedPrize = 0;
-            lifelines = {
-                fiftyFifty: true,
-                phoneFriend: true,
-                askAudience: true
-            };
+            isProcessing = false;
+            lifelines = { fiftyFifty: true, phoneFriend: true, askAudience: true };
             
-            document.getElementById('lifeline-5050').disabled = false;
-            document.getElementById('lifeline-phone').disabled = false;
-            document.getElementById('lifeline-audience').disabled = false;
+            $('lifeline-5050').disabled = false;
+            $('lifeline-phone').disabled = false;
+            $('lifeline-audience').disabled = false;
             
-            // Reset ladder visibility on mobile
-            const ladder = document.getElementById('money-ladder');
-            ladder.classList.remove('show');
-            ladderVisible = false;
-            updateLadderToggleText();
-            
+            buildProgressIndicator();
             buildLadder();
             loadQuestion();
         }
 
-        function toggleLadder() {
-            const ladder = document.getElementById('money-ladder');
-            ladderVisible = !ladderVisible;
+        function buildProgressIndicator() {
+            const container = $('progress-indicator');
+            container.innerHTML = '';
             
-            if (ladderVisible) {
-                ladder.classList.add('show');
-            } else {
-                ladder.classList.remove('show');
-            }
-            
-            updateLadderToggleText();
+            questions.forEach((q, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'progress-dot' + (q.milestone ? ' milestone' : '');
+                dot.id = 'progress-' + i;
+                container.appendChild(dot);
+            });
         }
 
-        function updateLadderToggleText() {
-            const toggle = document.getElementById('ladder-toggle');
-            toggle.textContent = ladderVisible ? '📊 隱藏獎金階梯' : '📊 顯示獎金階梯';
+        function updateProgress() {
+            questions.forEach((_, i) => {
+                const dot = $('progress-' + i);
+                dot.classList.remove('current', 'completed');
+                if (i < currentQuestion) dot.classList.add('completed');
+                else if (i === currentQuestion) dot.classList.add('current');
+            });
         }
 
         function buildLadder() {
-            const ladderContainer = document.getElementById('ladder-items');
-            ladderContainer.innerHTML = '';
+            const buildItems = (container) => {
+                container.innerHTML = '';
+                for (let i = questions.length - 1; i >= 0; i--) {
+                    const q = questions[i];
+                    const item = document.createElement('div');
+                    item.className = 'ladder-item' + (q.milestone ? ' milestone' : '');
+                    item.dataset.index = i;
+                    item.innerHTML = `<span class="q-num">Q${q.id}</span><span class="amount">${q.prize}</span>`;
+                    container.appendChild(item);
+                }
+            };
             
-            for (let i = questions.length - 1; i >= 0; i--) {
-                const q = questions[i];
-                const item = document.createElement('div');
-                item.className = 'ladder-item' + (q.milestone ? ' milestone' : '');
-                item.id = 'ladder-' + i;
-                item.innerHTML = `
-                    <span class="q-num">Q${q.id}</span>
-                    <span class="amount">${q.prize}</span>
-                `;
-                ladderContainer.appendChild(item);
-            }
+            buildItems($('ladder-items'));
+            buildItems($('desktop-ladder-items'));
         }
 
         function updateLadder() {
-            for (let i = 0; i < questions.length; i++) {
-                const item = document.getElementById('ladder-' + i);
-                item.classList.remove('current', 'completed');
-                
-                if (i < currentQuestion) {
-                    item.classList.add('completed');
-                } else if (i === currentQuestion) {
-                    item.classList.add('current');
-                }
-            }
+            const updateItems = (containerSelector) => {
+                const items = document.querySelectorAll(`${containerSelector} .ladder-item`);
+                items.forEach(item => {
+                    const idx = parseInt(item.dataset.index);
+                    item.classList.remove('current', 'completed');
+                    if (idx < currentQuestion) item.classList.add('completed');
+                    else if (idx === currentQuestion) item.classList.add('current');
+                });
+            };
+            
+            updateItems('#ladder-items');
+            updateItems('#desktop-ladder-items');
         }
 
         function loadQuestion() {
             const q = questions[currentQuestion];
             
-            document.getElementById('q-number').textContent = q.id;
-            document.getElementById('question-text').textContent = q.question;
-            document.getElementById('current-prize').textContent = currentPrize > 0 ? 
-                '$' + currentPrize.toLocaleString() : '$0';
+            $('q-number').textContent = q.id;
+            $('question-text').textContent = q.question;
+            $('current-prize').textContent = currentPrize > 0 ? '$' + currentPrize.toLocaleString() : '$0';
             
-            const diffBadge = document.getElementById('difficulty-badge');
+            const diffBadge = $('difficulty-badge');
             diffBadge.textContent = q.difficulty;
-            diffBadge.className = 'difficulty-badge';
+            diffBadge.className = 'difficulty-badge difficulty-' + 
+                { '簡單': 'easy', '中等': 'medium', '困難': 'hard', '終極': 'ultimate' }[q.difficulty];
             
-            switch(q.difficulty) {
-                case '簡單': diffBadge.classList.add('difficulty-easy'); break;
-                case '中等': diffBadge.classList.add('difficulty-medium'); break;
-                case '困難': diffBadge.classList.add('difficulty-hard'); break;
-                case '終極': diffBadge.classList.add('difficulty-ultimate'); break;
-            }
-            
-            const buttons = document.querySelectorAll('.answer-btn');
+            const buttons = $$('.answer-btn');
             const letters = ['A', 'B', 'C', 'D'];
             
-            buttons.forEach((btn, index) => {
+            buttons.forEach((btn, i) => {
                 btn.className = 'answer-btn';
                 btn.disabled = false;
-                btn.innerHTML = `
-                    <span class="answer-letter">${letters[index]}</span>
-                    <span class="answer-text">${q.answers[index]}</span>
-                `;
+                btn.innerHTML = `<span class="answer-letter">${letters[i]}</span><span class="answer-text">${q.answers[i]}</span>`;
             });
             
+            updateProgress();
             updateLadder();
         }
 
         function selectAnswer(index) {
-            const buttons = document.querySelectorAll('.answer-btn');
+            if (isProcessing) return;
+            isProcessing = true;
+            
+            const buttons = $$('.answer-btn');
             const q = questions[currentQuestion];
             
             buttons.forEach(btn => btn.disabled = true);
             buttons[index].classList.add('selected');
-            
             playSound('select');
             
             setTimeout(() => {
+                buttons[index].classList.remove('selected');
+                
                 if (index === q.correct) {
-                    // Correct answer
-                    buttons[index].classList.remove('selected');
                     buttons[index].classList.add('correct');
                     playSound('correct');
-                    
                     currentPrize = q.prizeValue;
-                    
-                    // Update guaranteed prize if milestone
-                    if (q.milestone) {
-                        guaranteedPrize = q.prizeValue;
-                    }
-                    
-                    document.getElementById('current-prize').textContent = '$' + currentPrize.toLocaleString();
+                    if (q.milestone) guaranteedPrize = q.prizeValue;
+                    $('current-prize').textContent = '$' + currentPrize.toLocaleString();
                     
                     setTimeout(() => {
                         currentQuestion++;
-                        
+                        isProcessing = false;
                         if (currentQuestion >= questions.length) {
-                            // Won the game!
                             showResult(true, currentPrize);
                         } else {
                             loadQuestion();
                         }
-                    }, 2000);
+                    }, 1500);
                 } else {
-                    // Wrong answer
-                    buttons[index].classList.remove('selected');
                     buttons[index].classList.add('wrong');
                     buttons[q.correct].classList.add('correct');
                     playSound('wrong');
                     
                     setTimeout(() => {
+                        isProcessing = false;
                         showResult(false, guaranteedPrize);
                     }, 2000);
                 }
-            }, 2000);
+            }, 1500);
         }
 
+        // ===== LIFELINES =====
         function useFiftyFifty() {
-            if (!lifelines.fiftyFifty) return;
-            
+            if (!lifelines.fiftyFifty || isProcessing) return;
             lifelines.fiftyFifty = false;
-            document.getElementById('lifeline-5050').disabled = true;
+            $('lifeline-5050').disabled = true;
             playSound('select');
             
             const q = questions[currentQuestion];
-            const buttons = document.querySelectorAll('.answer-btn');
-            const wrongAnswers = [];
+            const buttons = $$('.answer-btn');
+            const wrongIndices = [0,1,2,3].filter(i => i !== q.correct);
             
-            for (let i = 0; i < 4; i++) {
-                if (i !== q.correct) wrongAnswers.push(i);
-            }
-            
-            // Remove 2 random wrong answers
-            wrongAnswers.sort(() => Math.random() - 0.5);
-            buttons[wrongAnswers[0]].classList.add('hidden-answer');
-            buttons[wrongAnswers[0]].disabled = true;
-            buttons[wrongAnswers[1]].classList.add('hidden-answer');
-            buttons[wrongAnswers[1]].disabled = true;
+            // Shuffle and pick 2
+            wrongIndices.sort(() => Math.random() - 0.5);
+            [wrongIndices[0], wrongIndices[1]].forEach(i => {
+                buttons[i].classList.add('hidden-answer');
+                buttons[i].disabled = true;
+            });
         }
 
         function usePhoneFriend() {
-            if (!lifelines.phoneFriend) return;
-            
+            if (!lifelines.phoneFriend || isProcessing) return;
             lifelines.phoneFriend = false;
-            document.getElementById('lifeline-phone').disabled = true;
+            $('lifeline-phone').disabled = true;
             playSound('select');
             
             const q = questions[currentQuestion];
             const letters = ['A', 'B', 'C', 'D'];
-            const confidence = Math.floor(Math.random() * 30) + 70;
+            const confidence = Math.floor(Math.random() * 25) + 70;
             
-            showCustomAlert(`📞 你嘅朋友話：\n\n"我諗應該係 ${letters[q.correct]}...\n我${confidence}%肯定！"`);
+            showAlert(
+                `📞 你嘅朋友話：\n\n「我諗應該係 ${letters[q.correct]}...\n我${confidence}%肯定！」`,
+                [{ text: '明白', class: 'primary' }]
+            );
         }
 
         function useAskAudience() {
-            if (!lifelines.askAudience) return;
-            
+            if (!lifelines.askAudience || isProcessing) return;
             lifelines.askAudience = false;
-            document.getElementById('lifeline-audience').disabled = true;
+            $('lifeline-audience').disabled = true;
             playSound('select');
             
             const q = questions[currentQuestion];
             const votes = [0, 0, 0, 0];
-            votes[q.correct] = Math.floor(Math.random() * 30) + 50;
+            votes[q.correct] = Math.floor(Math.random() * 25) + 55;
             
             let remaining = 100 - votes[q.correct];
-            for (let i = 0; i < 4; i++) {
-                if (i !== q.correct) {
-                    const vote = i === 3 ? remaining : Math.floor(Math.random() * remaining * 0.6);
+            [0,1,2,3].filter(i => i !== q.correct).forEach((i, idx, arr) => {
+                if (idx === arr.length - 1) {
+                    votes[i] = remaining;
+                } else {
+                    const vote = Math.floor(Math.random() * remaining * 0.5);
                     votes[i] = vote;
                     remaining -= vote;
                 }
-            }
+            });
             
             const letters = ['A', 'B', 'C', 'D'];
-            let result = "👥 現場觀眾投票結果：\n\n";
-            for (let i = 0; i < 4; i++) {
-                const bar = '█'.repeat(Math.floor(votes[i]/5));
-                result += `${letters[i]}: ${bar} ${votes[i]}%\n`;
-            }
+            let html = '<div style="text-align:left;margin-bottom:15px;font-size:1.1rem;">👥 現場觀眾投票：</div>';
             
-            showCustomAlert(result);
+            letters.forEach((letter, i) => {
+                html += `
+                    <div class="vote-bar-container">
+                        <div class="vote-bar-label">
+                            <span>${letter}</span>
+                            <span>${votes[i]}%</span>
+                        </div>
+                        <div class="vote-bar">
+                            <div class="vote-bar-fill" style="width:${votes[i]}%"></div>
+                        </div>
+                    </div>`;
+            });
+            
+            showAlertHTML(html, [{ text: '明白', class: 'primary' }]);
         }
 
-        function showCustomAlert(message) {
-            // Create custom alert for better mobile experience
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'custom-alert';
-            alertDiv.innerHTML = `
-                <div class="custom-alert-content">
-                    <pre style="white-space: pre-wrap; font-family: inherit;">${message}</pre>
-                    <button onclick="this.parentElement.parentElement.remove()">確定</button>
-                </div>
-            `;
-            
-            // Add styles for custom alert
-            alertDiv.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 3000;
-                padding: 20px;
-            `;
-            
-            const content = alertDiv.querySelector('.custom-alert-content');
-            content.style.cssText = `
-                background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
-                border: 3px solid #ffd700;
-                border-radius: 20px;
-                padding: 25px;
-                max-width: 400px;
-                width: 100%;
-                text-align: center;
-                color: white;
-                font-size: 1.1rem;
-                line-height: 1.6;
-            `;
-            
-            const btn = alertDiv.querySelector('button');
-            btn.style.cssText = `
-                margin-top: 20px;
-                padding: 12px 30px;
-                background: linear-gradient(135deg, #ffd700, #ff9800);
-                border: none;
-                border-radius: 25px;
-                color: #38003c;
-                font-size: 1rem;
-                font-weight: 700;
-                cursor: pointer;
-            `;
-            
-            document.body.appendChild(alertDiv);
+        // ===== UI HELPERS =====
+        function showAlert(text, buttons) {
+            $('alert-text').textContent = text;
+            $('alert-text').style.whiteSpace = 'pre-wrap';
+            renderAlertButtons(buttons);
+            $('alert-modal').classList.add('active');
+        }
+
+        function showAlertHTML(html, buttons) {
+            $('alert-text').innerHTML = html;
+            $('alert-text').style.whiteSpace = 'normal';
+            renderAlertButtons(buttons);
+            $('alert-modal').classList.add('active');
+        }
+
+        function renderAlertButtons(buttons) {
+            const container = $('alert-buttons');
+            container.innerHTML = '';
+            buttons.forEach(btn => {
+                const button = document.createElement('button');
+                button.className = 'alert-btn ' + (btn.class || 'primary');
+                button.textContent = btn.text;
+                button.onclick = () => {
+                    $('alert-modal').classList.remove('active');
+                    if (btn.onClick) btn.onClick();
+                };
+                container.appendChild(button);
+            });
+        }
+
+        function showConfirm(text, onConfirm) {
+            showAlert(text, [
+                { text: '確定', class: 'confirm', onClick: onConfirm },
+                { text: '取消', class: 'cancel' }
+            ]);
         }
 
         function walkAway() {
-            showConfirmDialog(
+            if (isProcessing) return;
+            showConfirm(
                 `你確定要袋住 $${currentPrize.toLocaleString()} 走？`,
                 () => {
                     playSound('select');
@@ -1523,84 +1606,17 @@
             );
         }
 
-        function showConfirmDialog(message, onConfirm) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'custom-alert';
-            alertDiv.innerHTML = `
-                <div class="custom-alert-content">
-                    <p style="margin-bottom: 20px; font-size: 1.1rem;">${message}</p>
-                    <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-                        <button class="confirm-btn">確定</button>
-                        <button class="cancel-btn">取消</button>
-                    </div>
-                </div>
-            `;
-            
-            alertDiv.style.cssText = `
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0,0,0,0.8);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 3000;
-                padding: 20px;
-            `;
-            
-            const content = alertDiv.querySelector('.custom-alert-content');
-            content.style.cssText = `
-                background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
-                border: 3px solid #ffd700;
-                border-radius: 20px;
-                padding: 25px;
-                max-width: 400px;
-                width: 100%;
-                text-align: center;
-                color: white;
-            `;
-            
-            const confirmBtn = alertDiv.querySelector('.confirm-btn');
-            confirmBtn.style.cssText = `
-                padding: 12px 30px;
-                background: linear-gradient(135deg, #4CAF50, #45a049);
-                border: none;
-                border-radius: 25px;
-                color: white;
-                font-size: 1rem;
-                font-weight: 700;
-                cursor: pointer;
-            `;
-            
-            const cancelBtn = alertDiv.querySelector('.cancel-btn');
-            cancelBtn.style.cssText = `
-                padding: 12px 30px;
-                background: linear-gradient(135deg, #f44336, #d32f2f);
-                border: none;
-                border-radius: 25px;
-                color: white;
-                font-size: 1rem;
-                font-weight: 700;
-                cursor: pointer;
-            `;
-            
-            confirmBtn.onclick = () => {
-                alertDiv.remove();
-                onConfirm();
-            };
-            
-            cancelBtn.onclick = () => alertDiv.remove();
-            
-            document.body.appendChild(alertDiv);
+        function toggleLadder() {
+            $('ladder-modal').classList.add('active');
+        }
+
+        function closeLadder() {
+            $('ladder-modal').classList.remove('active');
         }
 
         function showResult(won, prize, walkedAway = false) {
-            const modal = document.getElementById('result-modal');
-            const icon = document.getElementById('modal-icon');
-            const title = document.getElementById('modal-title');
-            const prizeDisplay = document.getElementById('modal-prize');
+            const icon = $('modal-icon');
+            const title = $('modal-title');
             
             if (won && !walkedAway && prize === 10000000) {
                 icon.textContent = '🏆';
@@ -1611,65 +1627,83 @@
                 icon.textContent = '💰';
                 title.textContent = walkedAway ? '你選擇袋住走！' : '恭喜你！';
                 playSound('win');
+                if (prize >= 320000) createConfetti();
             } else {
                 icon.textContent = '😢';
                 title.textContent = '錯咗！遊戲結束';
             }
             
-            prizeDisplay.textContent = '$' + prize.toLocaleString();
-            modal.classList.add('active');
-            
-            if (won && prize >= 320000) {
-                createConfetti();
-            }
+            $('modal-prize').textContent = '$' + prize.toLocaleString();
+            $('result-modal').classList.add('active');
         }
 
         function createConfetti() {
-            const colors = ['🎉', '🎊', '⭐', '💫', '✨', '🌟', '🏆', '💰'];
-            
-            for (let i = 0; i < 40; i++) {
+            const emojis = ['🎉', '🎊', '⭐', '💫', '✨', '🌟', '🏆', '💰'];
+            for (let i = 0; i < 35; i++) {
                 setTimeout(() => {
                     const confetti = document.createElement('div');
                     confetti.className = 'confetti';
-                    confetti.textContent = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.textContent = emojis[Math.floor(Math.random() * emojis.length)];
                     confetti.style.left = Math.random() * 100 + 'vw';
                     confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
                     document.body.appendChild(confetti);
-                    
                     setTimeout(() => confetti.remove(), 4000);
-                }, i * 50);
+                }, i * 60);
             }
         }
 
         function restartGame() {
-            document.getElementById('result-modal').classList.remove('active');
+            $('result-modal').classList.remove('active');
             initGame();
         }
 
         function toggleSound() {
             soundEnabled = !soundEnabled;
-            document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
+            $('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
         }
 
-        // ===== INITIALIZE =====
+        // ===== EVENT LISTENERS =====
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
             animateLoading();
+            setInterval(createParticles, 6000);
             
-            // Continue creating particles
-            setInterval(createParticles, 5000);
+            // Button listeners
+            $('start-btn').addEventListener('click', startGame);
+            $('restart-btn').addEventListener('click', restartGame);
+            $('sound-toggle').addEventListener('click', toggleSound);
+            $('walk-away-btn').addEventListener('click', walkAway);
+            $('ladder-btn').addEventListener('click', toggleLadder);
+            $('ladder-close').addEventListener('click', closeLadder);
+            $('lifeline-5050').addEventListener('click', useFiftyFifty);
+            $('lifeline-phone').addEventListener('click', usePhoneFriend);
+            $('lifeline-audience').addEventListener('click', useAskAudience);
+            
+            // Answer buttons - using event delegation
+            $('answers-grid').addEventListener('click', (e) => {
+                const btn = e.target.closest('.answer-btn');
+                if (btn && !btn.disabled) {
+                    selectAnswer(parseInt(btn.dataset.index));
+                }
+            });
+            
+            // Close ladder on backdrop click
+            $('ladder-modal').addEventListener('click', (e) => {
+                if (e.target === $('ladder-modal')) closeLadder();
+            });
+            
+            // Close alert on backdrop click
+            $('alert-modal').addEventListener('click', (e) => {
+                if (e.target === $('alert-modal')) {
+                    $('alert-modal').classList.remove('active');
+                }
+            });
         });
 
-        // Prevent zoom on double tap for iOS
-        document.addEventListener('touchend', function(event) {
-            const now = Date.now();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        let lastTouchEnd = 0;
+        // Prevent pull-to-refresh
+        document.body.addEventListener('touchmove', (e) => {
+            if (e.target.closest('.ladder-content, .alert-content, .modal-content')) return;
+        }, { passive: true });
     </script>
 </body>
 </html>
