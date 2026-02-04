@@ -1,1 +1,1261 @@
 
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 英超百萬富翁 2025-26</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== INTRO ANIMATION ===== */
+        #intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #38003c 0%, #00ff87 100%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        #intro-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .intro-container {
+            text-align: center;
+            position: relative;
+        }
+
+        /* Premier League Logo Animation */
+        .pl-logo {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+            animation: logoFloat 3s ease-in-out infinite, logoGlow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.5));
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 20px rgba(0, 255, 135, 0.5)); }
+            100% { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.8)); }
+        }
+
+        /* Football particles */
+        .football-particle {
+            position: absolute;
+            font-size: 30px;
+            animation: particleFall linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes particleFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .intro-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 4px 8px rgba(0, 0, 0, 0.5);
+            animation: titlePulse 2s ease-in-out infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes titlePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .intro-subtitle {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 40px;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .start-btn {
+            padding: 20px 60px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #38003c;
+            background: linear-gradient(135deg, #ffd700, #ffed4a, #ffd700);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+            animation: fadeInUp 1s ease 1s both, btnGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes btnGlow {
+            0%, 100% { box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4); }
+            50% { box-shadow: 0 15px 50px rgba(255, 215, 0, 0.8); }
+        }
+
+        .start-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 50px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Loading bar */
+        .loading-container {
+            width: 300px;
+            margin-top: 40px;
+            animation: fadeInUp 1s ease 1.5s both;
+        }
+
+        .loading-text {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        .loading-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .loading-progress {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #00ff87, #ffd700);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* Spotlight effect */
+        .spotlight {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+            animation: spotlightMove 5s ease-in-out infinite;
+        }
+
+        @keyframes spotlightMove {
+            0%, 100% { background: radial-gradient(circle at 30% 30%, transparent 0%, rgba(0, 0, 0, 0.4) 100%); }
+            25% { background: radial-gradient(circle at 70% 30%, transparent 0%, rgba(0, 0, 0, 0.4) 100%); }
+            50% { background: radial-gradient(circle at 70% 70%, transparent 0%, rgba(0, 0, 0, 0.4) 100%); }
+            75% { background: radial-gradient(circle at 30% 70%, transparent 0%, rgba(0, 0, 0, 0.4) 100%); }
+        }
+
+        /* ===== GAME SCREEN ===== */
+        #game-screen {
+            display: none;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        #game-screen.active {
+            display: block;
+            animation: fadeIn 1s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .game-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Header */
+        .game-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(56, 0, 60, 0.9), rgba(0, 255, 135, 0.3));
+            border-radius: 20px;
+            border: 2px solid #00ff87;
+            margin-bottom: 20px;
+        }
+
+        .game-header h1 {
+            font-size: 2rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .current-prize {
+            font-size: 2.5rem;
+            color: #00ff87;
+            margin-top: 10px;
+            font-weight: 900;
+            animation: prizeGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes prizeGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 135, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(0, 255, 135, 1), 0 0 50px rgba(0, 255, 135, 0.5); }
+        }
+
+        /* Question Area */
+        .question-area {
+            background: linear-gradient(180deg, #1a1a3e 0%, #0d0d2b 100%);
+            border-radius: 20px;
+            padding: 30px;
+            border: 3px solid #38003c;
+            box-shadow: 0 0 30px rgba(56, 0, 60, 0.5), inset 0 0 50px rgba(0, 255, 135, 0.1);
+        }
+
+        .question-number {
+            color: #00ff87;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .difficulty-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .difficulty-easy { background: #4CAF50; color: white; }
+        .difficulty-medium { background: #FF9800; color: white; }
+        .difficulty-hard { background: #f44336; color: white; }
+        .difficulty-ultimate { background: linear-gradient(135deg, #ffd700, #ff6b6b); color: #38003c; }
+
+        .question-text {
+            font-size: 1.5rem;
+            color: white;
+            margin: 20px 0 30px;
+            line-height: 1.6;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(56, 0, 60, 0.5), rgba(0, 255, 135, 0.1));
+            border-radius: 15px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .answers-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .answers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .answer-btn {
+            padding: 20px;
+            font-size: 1.1rem;
+            color: white;
+            background: linear-gradient(135deg, #2a2a5a, #1a1a3e);
+            border: 2px solid #38003c;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .answer-btn:hover::before {
+            left: 100%;
+        }
+
+        .answer-btn:hover {
+            background: linear-gradient(135deg, #38003c, #00ff87);
+            border-color: #00ff87;
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(0, 255, 135, 0.4);
+        }
+
+        .answer-btn.selected {
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            border-color: #ffd700;
+            animation: selectedPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes selectedPulse {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+        }
+
+        .answer-btn.correct {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-color: #4CAF50;
+            animation: correctAnswer 0.5s ease;
+        }
+
+        @keyframes correctAnswer {
+            0%, 50%, 100% { transform: scale(1); }
+            25%, 75% { transform: scale(1.05); }
+        }
+
+        .answer-btn.wrong {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+            border-color: #f44336;
+            animation: wrongAnswer 0.5s ease;
+        }
+
+        @keyframes wrongAnswer {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .answer-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .answer-letter {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            color: #38003c;
+            border-radius: 50%;
+            font-weight: 900;
+            margin-right: 15px;
+        }
+
+        /* Money Ladder */
+        .money-ladder {
+            background: linear-gradient(180deg, #1a1a3e 0%, #0d0d2b 100%);
+            border-radius: 20px;
+            padding: 20px;
+            border: 3px solid #38003c;
+            box-shadow: 0 0 30px rgba(56, 0, 60, 0.5);
+        }
+
+        .ladder-title {
+            text-align: center;
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .ladder-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .ladder-item.current {
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            color: #38003c;
+            font-weight: 700;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        .ladder-item.completed {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+        }
+
+        .ladder-item.milestone {
+            border: 2px solid #00ff87;
+        }
+
+        .ladder-item .q-num {
+            color: #00ff87;
+        }
+
+        .ladder-item.current .q-num,
+        .ladder-item.completed .q-num {
+            color: inherit;
+        }
+
+        .ladder-item .amount {
+            color: white;
+            font-weight: 600;
+        }
+
+        .ladder-item.current .amount,
+        .ladder-item.completed .amount {
+            color: inherit;
+        }
+
+        /* Lifelines */
+        .lifelines {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .lifeline-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            background: linear-gradient(135deg, #2a2a5a, #1a1a3e);
+            color: #ffd700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lifeline-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            color: #38003c;
+            transform: scale(1.1);
+        }
+
+        .lifeline-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Result Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a3e, #0d0d2b);
+            border: 3px solid #ffd700;
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
+        }
+
+        .modal-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: iconBounce 1s ease infinite;
+        }
+
+        @keyframes iconBounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .modal-prize {
+            font-size: 3rem;
+            color: #00ff87;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px rgba(0, 255, 135, 0.5);
+        }
+
+        .modal-btn {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            color: #38003c;
+            background: linear-gradient(135deg, #ffd700, #ff9800);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+
+        .modal-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            animation: confettiFall linear forwards;
+            z-index: 2001;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sound toggle */
+        .sound-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid #ffd700;
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffd700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background: #ffd700;
+            color: #38003c;
+        }
+
+        /* Footer credits */
+        .footer-credits {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Walk Away Button */
+        .walk-away-btn {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            color: #ffd700;
+            background: transparent;
+            border: 2px solid #ffd700;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .walk-away-btn:hover {
+            background: #ffd700;
+            color: #38003c;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== INTRO SCREEN ===== -->
+    <div id="intro-screen">
+        <div class="spotlight"></div>
+        
+        <!-- Football Particles -->
+        <div id="particles-container"></div>
+        
+        <div class="intro-container">
+            <!-- Premier League Logo -->
+            <svg class="pl-logo" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="lionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#38003c"/>
+                        <stop offset="50%" style="stop-color:#00ff87"/>
+                        <stop offset="100%" style="stop-color:#38003c"/>
+                    </linearGradient>
+                </defs>
+                <circle cx="50" cy="50" r="45" fill="url(#lionGrad)" stroke="#ffd700" stroke-width="3"/>
+                <text x="50" y="40" text-anchor="middle" fill="white" font-size="12" font-weight="bold">PREMIER</text>
+                <text x="50" y="55" text-anchor="middle" fill="#ffd700" font-size="14" font-weight="bold">LEAGUE</text>
+                <text x="50" y="75" text-anchor="middle" fill="white" font-size="20">⚽</text>
+            </svg>
+            
+            <h1 class="intro-title">🏆 英超百萬富翁</h1>
+            <p class="intro-subtitle">2025-26 賽季特別版 💰</p>
+            
+            <button class="start-btn" onclick="startGame()">
+                開始挑戰 🚀
+            </button>
+            
+            <div class="loading-container">
+                <p class="loading-text">載入中...</p>
+                <div class="loading-bar">
+                    <div class="loading-progress" id="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GAME SCREEN ===== -->
+    <div id="game-screen">
+        <div class="game-container">
+            <div class="game-header">
+                <h1>🏆 英超百萬富翁 2025-26</h1>
+                <div class="current-prize" id="current-prize">$0</div>
+            </div>
+
+            <div class="question-area">
+                <div class="question-number">
+                    題目 <span id="q-number">1</span>/15
+                    <span class="difficulty-badge" id="difficulty-badge">簡單</span>
+                </div>
+                
+                <div class="question-text" id="question-text">
+                    問題載入中...
+                </div>
+
+                <div class="lifelines">
+                    <button class="lifeline-btn" id="lifeline-5050" onclick="useFiftyFifty()" title="50:50">
+                        50:50
+                    </button>
+                    <button class="lifeline-btn" id="lifeline-phone" onclick="usePhoneFriend()" title="打電話問朋友">
+                        📞
+                    </button>
+                    <button class="lifeline-btn" id="lifeline-audience" onclick="useAskAudience()" title="問現場觀眾">
+                        👥
+                    </button>
+                </div>
+
+                <div class="answers-grid" id="answers-grid">
+                    <button class="answer-btn" onclick="selectAnswer(0)">
+                        <span class="answer-letter">A</span>
+                        <span class="answer-text">答案 A</span>
+                    </button>
+                    <button class="answer-btn" onclick="selectAnswer(1)">
+                        <span class="answer-letter">B</span>
+                        <span class="answer-text">答案 B</span>
+                    </button>
+                    <button class="answer-btn" onclick="selectAnswer(2)">
+                        <span class="answer-letter">C</span>
+                        <span class="answer-text">答案 C</span>
+                    </button>
+                    <button class="answer-btn" onclick="selectAnswer(3)">
+                        <span class="answer-letter">D</span>
+                        <span class="answer-text">答案 D</span>
+                    </button>
+                </div>
+
+                <div style="text-align: center;">
+                    <button class="walk-away-btn" onclick="walkAway()">💼 袋住先走</button>
+                </div>
+            </div>
+
+            <div class="money-ladder">
+                <div class="ladder-title">💰 獎金階梯</div>
+                <div id="ladder-items"></div>
+            </div>
+
+            <div class="footer-credits">
+                港幣版 ・ 廣東話版<br>
+                🛡️ 保險線：Q5（$10,000）同 Q10（$320,000）
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== RESULT MODAL ===== -->
+    <div class="modal" id="result-modal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modal-icon">🏆</div>
+            <h2 class="modal-title" id="modal-title">恭喜你！</h2>
+            <div class="modal-prize" id="modal-prize">$10,000,000</div>
+            <button class="modal-btn" onclick="restartGame()">再玩一次 🔄</button>
+        </div>
+    </div>
+
+    <!-- Sound Toggle -->
+    <button class="sound-toggle" id="sound-toggle" onclick="toggleSound()">🔊</button>
+
+    <script>
+        // ===== GAME DATA =====
+        const questions = [
+            {
+                id: 1,
+                prize: "$1,000",
+                prizeValue: 1000,
+                difficulty: "簡單",
+                question: "2025-26賽季係英超聯賽嘅第幾個賽季？",
+                answers: ["第32個", "第33個", "第34個", "第35個"],
+                correct: 2
+            },
+            {
+                id: 2,
+                prize: "$2,000",
+                prizeValue: 2000,
+                difficulty: "簡單",
+                question: "邊支球隊係2024-25賽季英超冠軍？",
+                answers: ["曼城", "阿仙奴", "利物浦", "車路士"],
+                correct: 2
+            },
+            {
+                id: 3,
+                prize: "$3,000",
+                prizeValue: 3000,
+                difficulty: "簡單",
+                question: "曼聯喺2024-25賽季英超排第幾？",
+                answers: ["第12名", "第13名", "第15名", "第17名"],
+                correct: 2
+            },
+            {
+                id: 4,
+                prize: "$5,000",
+                prizeValue: 5000,
+                difficulty: "簡單",
+                question: "以下邊支球隊喺2025-26賽季重返英超？",
+                answers: ["諾定咸森林", "桑德蘭", "李斯特城", "修咸頓"],
+                correct: 1
+            },
+            {
+                id: 5,
+                prize: "$10,000",
+                prizeValue: 10000,
+                difficulty: "簡單",
+                milestone: true,
+                question: "曼聯2025-26賽季揭幕戰嘅對手係邊支球隊？",
+                answers: ["利物浦", "曼城", "阿仙奴", "車路士"],
+                correct: 2
+            },
+            {
+                id: 6,
+                prize: "$20,000",
+                prizeValue: 20000,
+                difficulty: "中等",
+                question: "桑德蘭重返英超之前，缺席咗幾多年？",
+                answers: ["5年", "6年", "8年", "10年"],
+                correct: 2
+            },
+            {
+                id: 7,
+                prize: "$40,000",
+                prizeValue: 40000,
+                difficulty: "中等",
+                question: "拉舒福特（Marcus Rashford）喺2025-26賽季外借去邊支球隊？",
+                answers: ["皇家馬德里", "AC米蘭", "巴塞隆拿", "祖雲達斯"],
+                correct: 2
+            },
+            {
+                id: 8,
+                prize: "$80,000",
+                prizeValue: 80000,
+                difficulty: "中等",
+                question: "2025-26賽季邊支球隊第一次用新球場比賽？",
+                answers: ["曼聯", "愛華頓", "車路士", "熱刺"],
+                correct: 1
+            },
+            {
+                id: 9,
+                prize: "$160,000",
+                prizeValue: 160000,
+                difficulty: "中等",
+                question: "曼聯用幾多轉會費簽下賓福特嘅恩布莫（Bryan Mbeumo）？",
+                answers: ["5000萬英鎊", "6000萬英鎊", "7100萬英鎊", "8000萬英鎊"],
+                correct: 2
+            },
+            {
+                id: 10,
+                prize: "$320,000",
+                prizeValue: 320000,
+                difficulty: "困難",
+                milestone: true,
+                question: "2025-26賽季第一個被炒嘅領隊係邊個？",
+                answers: ["每特（Graham Potter）", "聖圖（Nuno Espírito Santo）", "佩雷拉（Vítor Pereira）", "普高歸高（Ange Postecoglou）"],
+                correct: 1
+            },
+            {
+                id: 11,
+                prize: "$640,000",
+                prizeValue: 640000,
+                difficulty: "困難",
+                question: "曼聯喺2026年1月炒咗荒莫臣（Ruben Amorim）之後，邊個正式接任？",
+                answers: ["弗萊切（Darren Fletcher）", "卡里克（Michael Carrick）", "蘇荊赤（Ole Gunnar Solskjær）", "傑斯（Ryan Giggs）"],
+                correct: 1
+            },
+            {
+                id: 12,
+                prize: "$1,250,000",
+                prizeValue: 1250000,
+                difficulty: "困難",
+                question: "2025-26賽季，邊間公司取代Nike成為英超官方比賽用球供應商？",
+                answers: ["Adidas", "Puma", "Mitre", "Umbro"],
+                correct: 1
+            },
+            {
+                id: 13,
+                prize: "$2,500,000",
+                prizeValue: 2500000,
+                difficulty: "終極",
+                question: "由於曼聯喺兩項盃賽首輪出局，佢哋本賽季只需要踢幾多場正式比賽，係自1914-15賽季以嚟最少？",
+                answers: ["38場", "40場", "42場", "44場"],
+                correct: 1
+            },
+            {
+                id: 14,
+                prize: "$5,000,000",
+                prizeValue: 5000000,
+                difficulty: "終極",
+                question: "曼聯喺2025-26賽季足總盃第三圈俾邊支球隊淘汰，係自2013-14賽季以嚟首次喺第三圈出局？",
+                answers: ["水晶宮", "白禮頓", "伯恩茅斯", "富咸"],
+                correct: 1
+            },
+            {
+                id: 15,
+                prize: "$10,000,000",
+                prizeValue: 10000000,
+                difficulty: "終極",
+                question: "2025-26英超賽季20支球隊嘅總球場容量係幾多？",
+                answers: ["750,000", "800,000", "846,049", "900,000"],
+                correct: 2
+            }
+        ];
+
+        const milestones = [10000, 320000]; // Q5 and Q10 are milestones
+
+        // ===== GAME STATE =====
+        let currentQuestion = 0;
+        let currentPrize = 0;
+        let guaranteedPrize = 0;
+        let soundEnabled = true;
+        let lifelines = {
+            fiftyFifty: true,
+            phoneFriend: true,
+            askAudience: true
+        };
+
+        // ===== AUDIO =====
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            switch(type) {
+                case 'correct':
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1);
+                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2);
+                    break;
+                case 'wrong':
+                    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                    oscillator.frequency.setValueAtTime(150, audioContext.currentTime + 0.2);
+                    break;
+                case 'select':
+                    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                    break;
+                case 'win':
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime);
+                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.15);
+                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.3);
+                    oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.45);
+                    break;
+            }
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        // ===== INTRO ANIMATION =====
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const emojis = ['⚽', '🏆', '⭐', '💰', '🎯', '🥅'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const particle = document.createElement('div');
+                    particle.className = 'football-particle';
+                    particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    particle.style.left = Math.random() * 100 + 'vw';
+                    particle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    particle.style.animationDelay = Math.random() * 2 + 's';
+                    container.appendChild(particle);
+                    
+                    setTimeout(() => particle.remove(), 7000);
+                }, i * 200);
+            }
+        }
+
+        function animateLoading() {
+            const progress = document.getElementById('loading-progress');
+            let width = 0;
+            const interval = setInterval(() => {
+                width += Math.random() * 15;
+                if (width >= 100) {
+                    width = 100;
+                    clearInterval(interval);
+                }
+                progress.style.width = width + '%';
+            }, 200);
+        }
+
+        // ===== GAME FUNCTIONS =====
+        function startGame() {
+            const introScreen = document.getElementById('intro-screen');
+            const gameScreen = document.getElementById('game-screen');
+            
+            playSound('select');
+            
+            introScreen.classList.add('hidden');
+            
+            setTimeout(() => {
+                gameScreen.classList.add('active');
+                initGame();
+            }, 1000);
+        }
+
+        function initGame() {
+            currentQuestion = 0;
+            currentPrize = 0;
+            guaranteedPrize = 0;
+            lifelines = {
+                fiftyFifty: true,
+                phoneFriend: true,
+                askAudience: true
+            };
+            
+            document.getElementById('lifeline-5050').disabled = false;
+            document.getElementById('lifeline-phone').disabled = false;
+            document.getElementById('lifeline-audience').disabled = false;
+            
+            buildLadder();
+            loadQuestion();
+        }
+
+        function buildLadder() {
+            const ladderContainer = document.getElementById('ladder-items');
+            ladderContainer.innerHTML = '';
+            
+            for (let i = questions.length - 1; i >= 0; i--) {
+                const q = questions[i];
+                const item = document.createElement('div');
+                item.className = 'ladder-item' + (q.milestone ? ' milestone' : '');
+                item.id = 'ladder-' + i;
+                item.innerHTML = `
+                    <span class="q-num">Q${q.id}</span>
+                    <span class="amount">${q.prize}</span>
+                `;
+                ladderContainer.appendChild(item);
+            }
+        }
+
+        function updateLadder() {
+            for (let i = 0; i < questions.length; i++) {
+                const item = document.getElementById('ladder-' + i);
+                item.classList.remove('current', 'completed');
+                
+                if (i < currentQuestion) {
+                    item.classList.add('completed');
+                } else if (i === currentQuestion) {
+                    item.classList.add('current');
+                }
+            }
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            
+            document.getElementById('q-number').textContent = q.id;
+            document.getElementById('question-text').textContent = q.question;
+            document.getElementById('current-prize').textContent = currentPrize > 0 ? 
+                '$' + currentPrize.toLocaleString() : '$0';
+            
+            const diffBadge = document.getElementById('difficulty-badge');
+            diffBadge.textContent = q.difficulty;
+            diffBadge.className = 'difficulty-badge';
+            
+            switch(q.difficulty) {
+                case '簡單': diffBadge.classList.add('difficulty-easy'); break;
+                case '中等': diffBadge.classList.add('difficulty-medium'); break;
+                case '困難': diffBadge.classList.add('difficulty-hard'); break;
+                case '終極': diffBadge.classList.add('difficulty-ultimate'); break;
+            }
+            
+            const buttons = document.querySelectorAll('.answer-btn');
+            const letters = ['A', 'B', 'C', 'D'];
+            
+            buttons.forEach((btn, index) => {
+                btn.className = 'answer-btn';
+                btn.disabled = false;
+                btn.style.visibility = 'visible';
+                btn.innerHTML = `
+                    <span class="answer-letter">${letters[index]}</span>
+                    <span class="answer-text">${q.answers[index]}</span>
+                `;
+            });
+            
+            updateLadder();
+        }
+
+        function selectAnswer(index) {
+            const buttons = document.querySelectorAll('.answer-btn');
+            const q = questions[currentQuestion];
+            
+            buttons.forEach(btn => btn.disabled = true);
+            buttons[index].classList.add('selected');
+            
+            playSound('select');
+            
+            setTimeout(() => {
+                if (index === q.correct) {
+                    // Correct answer
+                    buttons[index].classList.remove('selected');
+                    buttons[index].classList.add('correct');
+                    playSound('correct');
+                    
+                    currentPrize = q.prizeValue;
+                    
+                    // Update guaranteed prize if milestone
+                    if (q.milestone) {
+                        guaranteedPrize = q.prizeValue;
+                    }
+                    
+                    document.getElementById('current-prize').textContent = '$' + currentPrize.toLocaleString();
+                    
+                    setTimeout(() => {
+                        currentQuestion++;
+                        
+                        if (currentQuestion >= questions.length) {
+                            // Won the game!
+                            showResult(true, currentPrize);
+                        } else {
+                            loadQuestion();
+                        }
+                    }, 2000);
+                } else {
+                    // Wrong answer
+                    buttons[index].classList.remove('selected');
+                    buttons[index].classList.add('wrong');
+                    buttons[q.correct].classList.add('correct');
+                    playSound('wrong');
+                    
+                    setTimeout(() => {
+                        showResult(false, guaranteedPrize);
+                    }, 2000);
+                }
+            }, 2000);
+        }
+
+        function useFiftyFifty() {
+            if (!lifelines.fiftyFifty) return;
+            
+            lifelines.fiftyFifty = false;
+            document.getElementById('lifeline-5050').disabled = true;
+            playSound('select');
+            
+            const q = questions[currentQuestion];
+            const buttons = document.querySelectorAll('.answer-btn');
+            const wrongAnswers = [];
+            
+            for (let i = 0; i < 4; i++) {
+                if (i !== q.correct) wrongAnswers.push(i);
+            }
+            
+            // Remove 2 random wrong answers
+            wrongAnswers.sort(() => Math.random() - 0.5);
+            buttons[wrongAnswers[0]].style.visibility = 'hidden';
+            buttons[wrongAnswers[1]].style.visibility = 'hidden';
+        }
+
+        function usePhoneFriend() {
+            if (!lifelines.phoneFriend) return;
+            
+            lifelines.phoneFriend = false;
+            document.getElementById('lifeline-phone').disabled = true;
+            playSound('select');
+            
+            const q = questions[currentQuestion];
+            const letters = ['A', 'B', 'C', 'D'];
+            const confidence = Math.floor(Math.random() * 30) + 70;
+            
+            alert(`📞 你嘅朋友話：\n\n"我諗應該係 ${letters[q.correct]}... 我${confidence}%肯定！"`);
+        }
+
+        function useAskAudience() {
+            if (!lifelines.askAudience) return;
+            
+            lifelines.askAudience = false;
+            document.getElementById('lifeline-audience').disabled = true;
+            playSound('select');
+            
+            const q = questions[currentQuestion];
+            const votes = [0, 0, 0, 0];
+            votes[q.correct] = Math.floor(Math.random() * 30) + 50;
+            
+            let remaining = 100 - votes[q.correct];
+            for (let i = 0; i < 4; i++) {
+                if (i !== q.correct) {
+                    const vote = i === 3 ? remaining : Math.floor(Math.random() * remaining * 0.6);
+                    votes[i] = vote;
+                    remaining -= vote;
+                }
+            }
+            
+            const letters = ['A', 'B', 'C', 'D'];
+            let result = "👥 現場觀眾投票結果：\n\n";
+            for (let i = 0; i < 4; i++) {
+                result += `${letters[i]}: ${'█'.repeat(Math.floor(votes[i]/5))} ${votes[i]}%\n`;
+            }
+            
+            alert(result);
+        }
+
+        function walkAway() {
+            if (confirm(`你確定要袋住 $${currentPrize.toLocaleString()} 走？`)) {
+                playSound('select');
+                showResult(true, currentPrize, true);
+            }
+        }
+
+        function showResult(won, prize, walkedAway = false) {
+            const modal = document.getElementById('result-modal');
+            const icon = document.getElementById('modal-icon');
+            const title = document.getElementById('modal-title');
+            const prizeDisplay = document.getElementById('modal-prize');
+            
+            if (won && !walkedAway && prize === 10000000) {
+                icon.textContent = '🏆';
+                title.textContent = '你贏咗！成為百萬富翁！';
+                playSound('win');
+                createConfetti();
+            } else if (won || walkedAway) {
+                icon.textContent = '💰';
+                title.textContent = walkedAway ? '你選擇袋住走！' : '恭喜你！';
+                playSound('win');
+            } else {
+                icon.textContent = '😢';
+                title.textContent = '錯咗！遊戲結束';
+            }
+            
+            prizeDisplay.textContent = '$' + prize.toLocaleString();
+            modal.classList.add('active');
+            
+            if (won && prize >= 320000) {
+                createConfetti();
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['🎉', '🎊', '⭐', '💫', '✨', '🌟', '🏆', '💰'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.textContent = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+        }
+
+        function restartGame() {
+            document.getElementById('result-modal').classList.remove('active');
+            initGame();
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-toggle').textContent = soundEnabled ? '🔊' : '🔇';
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            animateLoading();
+            
+            // Continue creating particles
+            setInterval(createParticles, 5000);
+        });
+    </script>
+</body>
+</html>
