@@ -1228,22 +1228,144 @@
     <script>
         // ===== GAME DATA =====
         const questions = [
-            { id: 1, prize: "$1,000", prizeValue: 1000, difficulty: "簡單", question: "2025-26賽季係英超聯賽嘅第幾個賽季？", answers: ["第32個", "第33個", "第34個", "第35個"], correct: 2 },
-            { id: 2, prize: "$2,000", prizeValue: 2000, difficulty: "簡單", question: "邊支球隊係2024-25賽季英超冠軍？", answers: ["曼城", "阿仙奴", "利物浦", "車路士"], correct: 2 },
-            { id: 3, prize: "$3,000", prizeValue: 3000, difficulty: "簡單", question: "曼聯喺2024-25賽季英超排第幾？", answers: ["第12名", "第13名", "第15名", "第17名"], correct: 2 },
-            { id: 4, prize: "$5,000", prizeValue: 5000, difficulty: "簡單", question: "以下邊支球隊喺2025-26賽季重返英超？", answers: ["諾定咸森林", "桑德蘭", "李斯特城", "修咸頓"], correct: 1 },
-            { id: 5, prize: "$10,000", prizeValue: 10000, difficulty: "簡單", milestone: true, question: "曼聯2025-26賽季揭幕戰嘅對手係邊支球隊？", answers: ["利物浦", "曼城", "阿仙奴", "車路士"], correct: 2 },
-            { id: 6, prize: "$20,000", prizeValue: 20000, difficulty: "中等", question: "桑德蘭重返英超之前，缺席咗幾多年？", answers: ["5年", "6年", "8年", "10年"], correct: 2 },
-            { id: 7, prize: "$40,000", prizeValue: 40000, difficulty: "中等", question: "拉舒福特（Marcus Rashford）喺2025-26賽季外借去邊支球隊？", answers: ["皇家馬德里", "AC米蘭", "巴塞隆拿", "祖雲達斯"], correct: 2 },
-            { id: 8, prize: "$80,000", prizeValue: 80000, difficulty: "中等", question: "2025-26賽季邊支球隊第一次用新球場比賽？", answers: ["曼聯", "愛華頓", "車路士", "熱刺"], correct: 1 },
-            { id: 9, prize: "$160,000", prizeValue: 160000, difficulty: "中等", question: "曼聯用幾多轉會費簽下賓福特嘅恩布莫（Bryan Mbeumo）？", answers: ["5000萬英鎊", "6000萬英鎊", "7100萬英鎊", "8000萬英鎊"], correct: 2 },
-            { id: 10, prize: "$320,000", prizeValue: 320000, difficulty: "困難", milestone: true, question: "2025-26賽季第一個被炒嘅領隊係邊個？", answers: ["每特（Graham Potter）", "聖圖（Nuno Espírito Santo）", "佩雷拉（Vítor Pereira）", "普高歸高（Ange Postecoglou）"], correct: 1 },
-            { id: 11, prize: "$640,000", prizeValue: 640000, difficulty: "困難", question: "曼聯喺2026年1月炒咗荒莫臣（Ruben Amorim）之後，邊個正式接任？", answers: ["弗萊切（Darren Fletcher）", "卡里克（Michael Carrick）", "蘇荊赤（Ole Gunnar Solskjær）", "傑斯（Ryan Giggs）"], correct: 1 },
-            { id: 12, prize: "$1,250,000", prizeValue: 1250000, difficulty: "困難", question: "2025-26賽季，邊間公司取代Nike成為英超官方比賽用球供應商？", answers: ["Adidas", "Puma", "Mitre", "Umbro"], correct: 1 },
-            { id: 13, prize: "$2,500,000", prizeValue: 2500000, difficulty: "終極", question: "由於曼聯喺兩項盃賽首輪出局，佢哋本賽季只需要踢幾多場正式比賽，係自1914-15賽季以嚟最少？", answers: ["38場", "40場", "42場", "44場"], correct: 1 },
-            { id: 14, prize: "$5,000,000", prizeValue: 5000000, difficulty: "終極", question: "曼聯喺2025-26賽季足總盃第三圈俾邊支球隊淘汰，係自2013-14賽季以嚟首次喺第三圈出局？", answers: ["水晶宮", "白禮頓", "伯恩茅斯", "富咸"], correct: 1 },
-            { id: 15, prize: "$10,000,000", prizeValue: 10000000, difficulty: "終極", question: "2025-26英超賽季20支球隊嘅總球場容量係幾多？", answers: ["750,000", "800,000", "846,049", "900,000"], correct: 2 }
-        ];
+  {
+    id: 1,
+    prize: "$1,000",
+    prizeValue: 1000,
+    difficulty: "簡單",
+    question: "如果英超賽程寫「曼聯 v 熱刺」，通常代表比賽喺邊個球場上演？",
+    answers: ["奧脫福（Old Trafford）", "熱刺球場（Tottenham Hotspur Stadium）", "溫布萊（Wembley）", "酋長球場（Emirates Stadium）"],
+    correct: 0
+  },
+  {
+    id: 2,
+    prize: "$2,000",
+    prizeValue: 2000,
+    difficulty: "簡單",
+    question: "熱刺現時主場嘅英文正式名稱係乜？",
+    answers: ["White Hart Lane", "Tottenham Hotspur Stadium", "London Stadium", "Stamford Bridge"],
+    correct: 1
+  },
+  {
+    id: 3,
+    prize: "$3,000",
+    prizeValue: 3000,
+    difficulty: "簡單",
+    question: "英超第一個賽季係邊一季？",
+    answers: ["1990-91", "1991-92", "1992-93", "1993-94"],
+    correct: 2
+  },
+  {
+    id: 4,
+    prize: "$5,000",
+    prizeValue: 5000,
+    difficulty: "簡單",
+    question: "熱刺其中一個暱稱「Lilywhites」主要係形容佢哋主場球衣乜嘢顏色？",
+    answers: ["紅色", "白色", "藍色", "綠色"],
+    correct: 1
+  },
+  {
+    id: 5,
+    prize: "$10,000",
+    prizeValue: 10000,
+    difficulty: "簡單",
+    milestone: true,
+    question: "1998-99 曼聯三冠王陣中，邊個球員曾經效力熱刺？",
+    answers: ["泰迪舒寧咸（Teddy Sheringham）", "哈利簡尼（Harry Kane）", "加里夫巴利（Gareth Bale）", "孫興慜（Son Heung-min）"],
+    correct: 0
+  },
+  {
+    id: 6,
+    prize: "$20,000",
+    prizeValue: 20000,
+    difficulty: "中等",
+    question: "2001年9月英超，熱刺半場領先 3-0，但曼聯最終反勝；最終比數係？",
+    answers: ["3-3", "4-3（曼聯）", "5-3（曼聯）", "5-4（曼聯）"],
+    correct: 2
+  },
+  {
+    id: 7,
+    prize: "$40,000",
+    prizeValue: 40000,
+    difficulty: "中等",
+    question: "米高·卡域（Michael Carrick）喺 2006 年由邊隊轉會加盟曼聯？",
+    answers: ["韋斯咸（West Ham）", "熱刺（Tottenham）", "愛華頓（Everton）", "紐卡素（Newcastle）"],
+    correct: 1
+  },
+  {
+    id: 8,
+    prize: "$80,000",
+    prizeValue: 80000,
+    difficulty: "中等",
+    question: "貝巴托夫（Dimitar Berbatov）喺 2008 年由邊隊轉會去曼聯？",
+    answers: ["熱刺（Tottenham）", "利華古遜（Leverkusen）", "摩納哥（Monaco）", "富咸（Fulham）"],
+    correct: 0
+  },
+  {
+    id: 9,
+    prize: "$160,000",
+    prizeValue: 160000,
+    difficulty: "中等",
+    question: "熱刺舊主場 White Hart Lane（白鹿徑）最後一季使用係邊個球季？",
+    answers: ["2014-15", "2015-16", "2016-17", "2017-18"],
+    correct: 2
+  },
+  {
+    id: 10,
+    prize: "$320,000",
+    prizeValue: 320000,
+    difficulty: "困難",
+    milestone: true,
+    question: "2020年10月英超，熱刺作客奧脫福 6-1 大勝曼聯；當時熱刺領隊係邊個？",
+    answers: ["普捷天奴（Mauricio Pochettino）", "摩連奴（José Mourinho）", "干地（Antonio Conte）", "普斯迪高古（Ange Postecoglou）"],
+    correct: 1
+  },
+  {
+    id: 11,
+    prize: "$640,000",
+    prizeValue: 640000,
+    difficulty: "困難",
+    question: "同一場 6-1，曼聯唯一入波係邊個射入十二碼？",
+    answers: ["般奴費南迪斯（Bruno Fernandes）", "拉舒福特（Marcus Rashford）", "普巴（Paul Pogba）", "C朗拿度（Cristiano Ronaldo）"],
+    correct: 0
+  },
+  {
+    id: 12,
+    prize: "$1,250,000",
+    prizeValue: 1250000,
+    difficulty: "困難",
+    question: "邊位領隊曾經同時做過曼聯同熱刺嘅主教練（英超年代）？",
+    answers: ["費格遜（Sir Alex Ferguson）", "坦赫（Erik ten Hag）", "摩連奴（José Mourinho）", "莫耶斯（David Moyes）"],
+    correct: 2
+  },
+  {
+    id: 13,
+    prize: "$2,500,000",
+    prizeValue: 2500000,
+    difficulty: "終極",
+    question: "2009 年聯賽盃決賽（曼聯 vs 熱刺）踢到加時都 0-0，最後曼聯互射十二碼贏；互射比數係？",
+    answers: ["3-2", "4-1", "5-4", "4-3"],
+    correct: 1
+  },
+  {
+    id: 14,
+    prize: "$5,000,000",
+    prizeValue: 5000000,
+    difficulty: "終極",
+    question: "2009 年聯賽盃決賽，為曼聯把關並喺互射十二碼救出關鍵射門嘅門將係邊個？",
+    answers: ["雲達沙（Edwin van der Sar）", "賓科士打（Ben Foster）", "迪基亞（David de Gea）", "古斯錫（Tomasz Kuszczak）"],
+    correct: 1
+  },
+  {
+    id: 15,
+    prize: "$10,000,000",
+    prizeValue: 10000000,
+    difficulty: "終極",
+    question: "2009 年聯賽盃決賽，熱刺正選門將係邊個？",
+    answers: ["費度（Brad Friedel）", "高美斯（Heurelho Gomes）", "洛里斯（Hugo Lloris）", "保羅羅賓遜（Paul Robinson）"],
+    correct: 1
+  }
+];
 
         // ===== GAME STATE =====
         let currentQuestion = 0;
